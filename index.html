@@ -231,17 +231,140 @@
     .context-item:hover{background:rgba(255,255,255,.06);color:white}
     .context-item.danger{color:#ff91b7}
 
-    @media (max-width:1100px){
+    .mobile-backlog-btn,.mobile-backlog-close,.backlog-overlay{display:none}
+
+    @media (max-width:1100px) and (min-width:761px){
       body{overflow:auto}
       .app{height:auto;min-height:100vh;grid-template-columns:250px minmax(720px,1fr)}
       .search-results{right:8px}
       .sync-status{min-width:110px}
     }
+
+    /* MOBILE: interface touch-first, sem alterar o layout desktop */
     @media (max-width:760px){
-      .addbar{grid-template-columns:minmax(0,1fr) auto auto}
+      html,body{height:auto;min-height:100%;overscroll-behavior-y:none}
+      body{overflow-x:hidden;overflow-y:auto;-webkit-tap-highlight-color:transparent}
+      .app{display:block;height:auto;min-height:100dvh;padding:10px 10px 22px}
+      .main{display:flex;flex-direction:column;gap:10px;overflow:visible;min-width:0}
+
+      .titlebar{height:52px;padding:0 2px;justify-content:flex-start}
+      .page-title{font-size:clamp(19px,6.1vw,25px);letter-spacing:.035em;white-space:nowrap}
+      .title-line{left:0;right:0}
+      .title-diamond{left:50%}
+
+      .addbar{
+        min-height:auto;
+        grid-template-columns:minmax(0,1fr) 42px 42px;
+        gap:7px;
+        padding:7px;
+        border-radius:15px;
+        position:sticky;
+        top:7px;
+        z-index:40;
+        backdrop-filter:blur(14px);
+        box-shadow:0 12px 30px rgba(0,0,0,.20);
+      }
+      .search-wrap{grid-column:1/-1;height:44px;border-radius:10px}
+      #gameSearch{font-size:16px} /* evita zoom automático no iOS */
+      .mobile-backlog-btn{display:flex;grid-column:1/2;justify-content:center;height:38px;padding:0 10px}
+      .mobile-backlog-btn .mobile-count{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:rgba(168,85,247,.17);color:#d8b4fe;font-size:10px}
+      #apiKeyBtn{grid-column:2/3;width:42px;padding:0;justify-content:center;font-size:0;position:relative}
+      #apiKeyBtn .key-dot{position:absolute;margin:-24px 0 0 23px;width:6px;height:6px}
+      #apiKeyBtn::after{content:'⚙';font-size:17px}
+      #syncNowBtn{grid-column:3/4;width:42px;padding:0;justify-content:center;font-size:0}
+      #syncNowBtn::after{content:'↻';font-size:20px}
       .addbar #exportBtn,.addbar #importBtn{display:none}
-      .sync-status{grid-column:1/-1;width:100%;height:30px}
-      .search-results{left:8px;right:8px;top:106px}
+      .sync-status{grid-column:1/-1;width:100%;height:29px;min-width:0;border-radius:9px;font-size:9px}
+      .search-results{left:7px;right:7px;top:58px;max-height:min(58vh,440px);border-radius:13px}
+      .search-result{grid-template-columns:64px minmax(0,1fr);gap:10px;padding:9px}
+      .result-img{width:64px;height:44px}
+      .result-name{font-size:12px}
+      .result-meta{font-size:9px}
+      .result-add{display:none}
+
+      /* Backlog vira drawer lateral no celular */
+      .backlog-shell{
+        position:fixed;
+        z-index:310;
+        inset:0 auto 0 0;
+        width:min(88vw,360px);
+        height:100dvh;
+        border-radius:0 24px 24px 0;
+        transform:translateX(-105%);
+        transition:transform .25s ease;
+        box-shadow:18px 0 60px rgba(0,0,0,.55),var(--glow-purple);
+      }
+      .backlog-shell.mobile-open{transform:translateX(0)}
+      .backlog-overlay{position:fixed;display:block;inset:0;z-index:300;background:rgba(1,3,10,.66);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .22s}
+      .backlog-overlay.open{opacity:1;pointer-events:auto}
+      .mobile-backlog-close{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;border:1px solid rgba(255,255,255,.10);background:#0b1430;color:#b9c7e5;font-size:20px;cursor:pointer}
+      .backlog-head{padding:6px 14px 12px}
+      .backlog-title{font-size:19px}
+      .backlog-scroll{padding:0 10px;mask-image:linear-gradient(transparent 0,#000 3%,#000 97%,transparent 100%)}
+      .backlog-item{height:72px;grid-template-columns:58px minmax(0,1fr) 34px;gap:9px;padding:6px}
+      .mini-cover{width:58px;height:58px}
+      .mini-name{font-size:12px}
+      .item-more{width:34px;height:38px;font-size:20px}
+
+      .queues{display:flex;flex-direction:column;gap:12px;overflow:visible;padding:0}
+      .queue-section,.queue-section.completed{display:grid;grid-template-rows:54px auto;min-height:0;border-radius:18px;overflow:hidden}
+      .section-head{height:54px;gap:9px;padding:0 12px}
+      .section-icon{width:34px;height:34px;border-radius:10px;flex:0 0 34px}
+      .section-icon svg{width:21px;height:21px}
+      .section-title{font-size:18px;white-space:nowrap}
+      .head-rule{margin-left:2px}
+      .section-glyph{font-size:13px}
+
+      .lanes{grid-template-columns:1fr;gap:9px;padding:0 9px 9px}
+      .lane{grid-template-rows:40px auto;min-height:0;border-radius:13px;overflow:hidden}
+      .lane-head{height:40px;padding:0 12px;font-size:13px}
+      .lane-head:after{width:60px;right:8px}
+      .lane-body{min-height:158px;gap:9px;padding:9px 10px 11px;scroll-snap-type:x proximity;overscroll-behavior-x:contain}
+      .lane-empty{min-height:136px;padding:16px;font-size:10px}
+      .game-card{flex:0 0 128px;border-radius:12px;scroll-snap-align:start;cursor:pointer}
+      .game-card:hover{transform:none}
+      .card-cover{height:102px}
+      .card-gradient{top:62px;height:46px}
+      .card-info{min-height:56px;padding:7px 8px 9px}
+      .card-name{font-size:10.5px}
+      .card-menu{opacity:1;width:31px;height:31px;right:5px;top:5px;font-size:18px;background:rgba(3,6,16,.88)}
+      .card-platforms .platform-badge{height:17px}
+      .platform-badge span{display:none}
+      .platform-badge{padding:0 5px;min-width:22px;justify-content:center}
+      .platform-badge svg{width:12px;height:12px}
+
+      .completed-body{min-height:140px;padding:9px 10px 11px;gap:9px;scroll-snap-type:x proximity}
+      .completed-card{flex:0 0 112px;scroll-snap-align:start;cursor:pointer}
+      .completed-card .card-cover{height:82px}
+      .completed-card .card-gradient{top:47px}
+      .completed-card .card-menu{opacity:1}
+      .completed-empty{min-height:118px;padding:15px}
+
+      /* Modais como bottom sheet */
+      .modal-backdrop{align-items:flex-end;padding:0}
+      .modal{width:100%;max-height:92dvh;overflow-y:auto;border-radius:22px 22px 0 0;border-left:0;border-right:0;border-bottom:0}
+      .modal-head{padding:15px 16px;position:sticky;top:0;background:#0b132e;z-index:2}
+      .modal-body{padding:16px;padding-bottom:max(20px,env(safe-area-inset-bottom))}
+      .close-btn{width:38px;height:38px;font-size:26px}
+      .selected-game{grid-template-columns:92px minmax(0,1fr);gap:12px}
+      .selected-cover{width:92px;height:72px}
+      .selected-name{font-size:15px}
+      .add-destination{grid-template-columns:1fr}
+      .dest-option,.platform-option,.primary-btn,.secondary-btn{min-height:44px}
+      .modal-actions{position:sticky;bottom:0;background:linear-gradient(180deg,rgba(7,12,30,0),#070c1e 25%);padding-top:24px;padding-bottom:2px}
+      .primary-btn,.secondary-btn{font-size:12px}
+
+      /* Menu de jogo grande o suficiente para toque */
+      .context-menu{min-width:min(270px,calc(100vw - 24px));max-height:70dvh;overflow-y:auto;padding:7px;border-radius:14px}
+      .context-item{min-height:43px;padding:10px 12px;font-size:12px}
+      .context-separator{height:1px;background:rgba(255,255,255,.07);margin:5px 7px}
+      .toast{left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));text-align:center;font-size:11px}
+    }
+
+    @media (max-width:380px){
+      .page-title{font-size:18px}
+      .section-title{font-size:16px}
+      .game-card{flex-basis:121px}
     }
   </style>
 </head>
@@ -251,7 +374,7 @@
     <div class="loop-label">rolagem infinita · ↑</div>
     <div class="backlog-head">
       <div class="backlog-title">▣ BACKLOG</div>
-      <div style="display:flex;align-items:center;gap:8px"><span class="count-pill" id="backlogCount">0</span><span class="infinity-mark">∞</span></div>
+      <div style="display:flex;align-items:center;gap:8px"><span class="count-pill" id="backlogCount">0</span><span class="infinity-mark">∞</span><button class="mobile-backlog-close" id="mobileBacklogClose" aria-label="Fechar Backlog">×</button></div>
     </div>
     <div class="backlog-scroll" id="backlogScroll"><div class="backlog-list" id="backlogList"></div></div>
     <div class="backlog-foot"><div class="loop-label" style="padding:0">↓ · rolagem infinita</div></div>
@@ -268,6 +391,7 @@
         <span class="search-icon">＋</span>
         <input id="gameSearch" autocomplete="off" placeholder="Digite o nome de um jogo para adicionar..." />
       </div>
+      <button class="toolbar-btn mobile-backlog-btn" id="mobileBacklogBtn">▣ Backlog <span class="mobile-count" id="mobileBacklogCount">0</span></button>
       <button class="toolbar-btn" id="apiKeyBtn"><span class="key-dot" id="keyDot"></span> ⚙ Configurações</button>
       <button class="toolbar-btn" id="syncNowBtn">↻ Sincronizar</button>
       <div class="sync-status local" id="syncStatus" title="Status da sincronização"><span class="sync-dot"></span><span id="syncStatusText">GitHub não conectado</span></div>
@@ -310,6 +434,7 @@
     </section>
   </main>
 </div>
+<div class="backlog-overlay" id="backlogOverlay"></div>
 
 <div class="modal-backdrop" id="keyModal">
   <div class="modal">
@@ -363,8 +488,14 @@
 
 <div class="context-menu" id="contextMenu">
   <button class="context-item" id="editPlatformsItem">Editar plataformas</button>
-  <button class="context-item" id="moveBacklogItem">Mover para Backlog</button>
-  <button class="context-item" id="moveCompletedItem">Marcar como Terminado</button>
+  <div class="context-separator"></div>
+  <button class="context-item" data-move-dest="backlog">▣ Mover para Backlog</button>
+  <button class="context-item" data-move-dest="ps5General">PS5 · Geral</button>
+  <button class="context-item" data-move-dest="ps5Stella">♥ PS5 · Com Stella</button>
+  <button class="context-item" data-move-dest="allyPower">ROG Ally · Tomada</button>
+  <button class="context-item" data-move-dest="allyPortable">ROG Ally · Portátil</button>
+  <button class="context-item" data-move-dest="completed">✓ Marcar como Terminado</button>
+  <div class="context-separator"></div>
   <button class="context-item danger" id="deleteGameItem">Excluir jogo</button>
 </div>
 <div class="toast" id="toast"></div>
@@ -596,6 +727,7 @@
     const list = el('backlogList');
     const ids = state.backlog.filter(id=>state.games[id]);
     el('backlogCount').textContent = ids.length;
+    if(el('mobileBacklogCount')) el('mobileBacklogCount').textContent = ids.length;
     if(!ids.length){ list.innerHTML = '<div class="backlog-empty">Seu Backlog está vazio.<br>Use a barra “+” para adicionar jogos ou arraste um jogo de volta para cá.</div>'; return; }
     const cards = ids.map(id => backlogCard(state.games[id])).join('');
     // Three copies make the manual vertical scroll loop seamlessly.
@@ -618,7 +750,7 @@
   function renderLane(laneId){
     const container = el(laneId);
     const ids = state.queues[laneId].filter(id=>state.games[id]);
-    if(!ids.length){ container.innerHTML = '<div class="lane-empty">Arraste um jogo do Backlog para cá<br>ou adicione diretamente pela busca.</div>'; return; }
+    if(!ids.length){ container.innerHTML = '<div class="lane-empty">Arraste um jogo do Backlog para cá<br>ou use o menu ⋮ do jogo no celular.</div>'; return; }
     container.innerHTML = ids.map(id => queueCard(state.games[id])).join('');
   }
 
@@ -634,7 +766,7 @@
     const container = el('completedDrop');
     const ids = state.completed.filter(id=>state.games[id]);
     el('completedCount').textContent = ids.length;
-    if(!ids.length){ container.innerHTML = '<div class="completed-empty">Arraste um jogo concluído para cá.<br>Ele sai automaticamente do Backlog ou da fila atual.</div>'; return; }
+    if(!ids.length){ container.innerHTML = '<div class="completed-empty">Arraste um jogo concluído para cá.<br>No celular, use o menu ⋮ e marque como Terminado.</div>'; return; }
     container.innerHTML = ids.map(id => completedCard(state.games[id])).join('');
   }
 
@@ -791,17 +923,49 @@
   }
   el('syncNowBtn').addEventListener('click',manualSync);
 
+  // Mobile backlog drawer
+  function openMobileBacklog(){
+    el('backlogDrop')?.classList.add('mobile-open');
+    el('backlogOverlay')?.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeMobileBacklog(){
+    el('backlogDrop')?.classList.remove('mobile-open');
+    el('backlogOverlay')?.classList.remove('open');
+    document.body.style.overflow='';
+  }
+  el('mobileBacklogBtn')?.addEventListener('click',openMobileBacklog);
+  el('mobileBacklogClose')?.addEventListener('click',closeMobileBacklog);
+  el('backlogOverlay')?.addEventListener('click',closeMobileBacklog);
+  window.addEventListener('resize',()=>{ if(window.innerWidth>760) closeMobileBacklog(); });
+
   // Context menu
   document.addEventListener('click',e=>{
     const menuBtn=e.target.closest('[data-menu-game]');
-    if(menuBtn){ e.stopPropagation(); activeGameId=menuBtn.dataset.menuGame; const r=menuBtn.getBoundingClientRect(); const menu=el('contextMenu'); menu.style.left=Math.min(r.left,window.innerWidth-180)+'px'; menu.style.top=Math.min(r.bottom+4,window.innerHeight-130)+'px'; menu.classList.add('open'); return; }
+    if(menuBtn){
+      e.stopPropagation(); activeGameId=menuBtn.dataset.menuGame;
+      const r=menuBtn.getBoundingClientRect(), menu=el('contextMenu');
+      if(window.innerWidth<=760){
+        menu.style.left='12px';
+        menu.style.top=Math.max(12,Math.min(r.bottom+6,window.innerHeight-390))+'px';
+      }else{
+        menu.style.left=Math.min(r.left,window.innerWidth-190)+'px';
+        menu.style.top=Math.min(r.bottom+4,window.innerHeight-150)+'px';
+      }
+      menu.classList.add('open'); return;
+    }
     if(!e.target.closest('#contextMenu')) el('contextMenu').classList.remove('open');
   });
   el('editPlatformsItem').addEventListener('click',()=>{ if(!state.games[activeGameId])return; editingGameId=activeGameId; selectedPlatforms=new Set(state.games[editingGameId].ownedPlatforms||[]); renderPlatformPicker(el('editPlatformPicker'),selectedPlatforms); el('contextMenu').classList.remove('open'); openModal('platformModal'); });
   el('editPlatformPicker').addEventListener('click',e=>{const b=e.target.closest('[data-platform]');if(!b)return;const id=b.dataset.platform;selectedPlatforms.has(id)?selectedPlatforms.delete(id):selectedPlatforms.add(id);renderPlatformPicker(el('editPlatformPicker'),selectedPlatforms);});
   el('savePlatformsBtn').addEventListener('click',()=>{ if(editingGameId && state.games[editingGameId] && selectedPlatforms.size){state.games[editingGameId].ownedPlatforms=[...selectedPlatforms];saveState();renderAll();closeModal('platformModal');toast('Plataformas atualizadas.');} else toast('Escolha pelo menos uma plataforma.'); });
-  el('moveBacklogItem').addEventListener('click',()=>{if(activeGameId)moveGame(activeGameId,'backlog');el('contextMenu').classList.remove('open');});
-  el('moveCompletedItem').addEventListener('click',()=>{if(activeGameId)moveGame(activeGameId,'completed');el('contextMenu').classList.remove('open');});
+  el('contextMenu').addEventListener('click',e=>{
+    const moveBtn=e.target.closest('[data-move-dest]');
+    if(!moveBtn)return;
+    if(activeGameId) moveGame(activeGameId,moveBtn.dataset.moveDest);
+    el('contextMenu').classList.remove('open');
+    closeMobileBacklog();
+  });
   el('deleteGameItem').addEventListener('click',()=>{if(!activeGameId||!state.games[activeGameId])return;const name=state.games[activeGameId].name;if(confirm(`Excluir “${name}” da biblioteca?`)){removeFromAllLocations(activeGameId);delete state.games[activeGameId];saveState();renderAll();toast('Jogo excluído.');}el('contextMenu').classList.remove('open');});
 
   // Import / export JSON
@@ -815,7 +979,7 @@
   function closeModal(id){el(id).classList.remove('open');}
   document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeModal(b.dataset.close)));
   document.querySelectorAll('.modal-backdrop').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)closeModal(m.id);}));
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.modal-backdrop.open').forEach(m=>closeModal(m.id));closeSearch();el('contextMenu').classList.remove('open');}});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.modal-backdrop.open').forEach(m=>closeModal(m.id));closeSearch();el('contextMenu').classList.remove('open');closeMobileBacklog();}});
 
   let toastTimer;
   function toast(msg){clearTimeout(toastTimer);const t=el('toast');t.textContent=msg;t.classList.add('show');toastTimer=setTimeout(()=>t.classList.remove('show'),2300);}
