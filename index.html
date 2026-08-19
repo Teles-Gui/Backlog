@@ -91,7 +91,7 @@
       background:rgba(9,15,38,.88);
       border-radius:17px;
       display:grid;
-      grid-template-columns:minmax(0,1fr) auto auto auto;
+      grid-template-columns:minmax(0,1fr) auto auto auto auto auto;
       gap:8px;
       align-items:center;
       padding:8px;
@@ -107,7 +107,7 @@
     .toolbar-btn:hover{border-color:rgba(34,211,238,.40);color:white;background:#0d1937}
     .key-dot{width:7px;height:7px;border-radius:50%;background:#7a8296;box-shadow:0 0 0 3px rgba(122,130,150,.08)}
     .key-dot.ok{background:#34d399;box-shadow:0 0 10px rgba(52,211,153,.6)}
-    .search-results{position:absolute;left:8px;right:310px;top:58px;border:1px solid rgba(168,85,247,.28);background:rgba(6,10,27,.98);border-radius:15px;overflow:hidden;box-shadow:0 20px 55px rgba(0,0,0,.5);display:none;max-height:430px;overflow-y:auto}
+    .search-results{position:absolute;left:8px;right:510px;top:58px;border:1px solid rgba(168,85,247,.28);background:rgba(6,10,27,.98);border-radius:15px;overflow:hidden;box-shadow:0 20px 55px rgba(0,0,0,.5);display:none;max-height:430px;overflow-y:auto}
     .search-results.open{display:block}
     .search-result{display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:12px;align-items:center;padding:9px 11px;border-bottom:1px solid rgba(255,255,255,.055);cursor:pointer}
     .search-result:last-child{border-bottom:0}
@@ -117,6 +117,24 @@
     .result-meta{font-size:10px;color:#8493b3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .result-add{font-family:Oxanium,sans-serif;color:#c084fc;font-weight:700;font-size:11px}
     .search-message{padding:18px;color:#8190ae;text-align:center;font-size:12px}
+
+    .sync-status{height:40px;border:1px solid rgba(255,255,255,.09);background:rgba(7,13,31,.82);border-radius:11px;padding:0 12px;display:flex;align-items:center;gap:8px;color:#8190ae;font-size:10px;font-weight:800;white-space:nowrap;min-width:122px;justify-content:center}
+    .sync-status .sync-dot{width:7px;height:7px;border-radius:50%;background:#64748b;box-shadow:0 0 0 3px rgba(100,116,139,.08)}
+    .sync-status.saving{color:#fbbf24;border-color:rgba(251,191,36,.20)}
+    .sync-status.saving .sync-dot{background:#fbbf24;box-shadow:0 0 10px rgba(251,191,36,.55);animation:pulseSync 1s infinite}
+    .sync-status.synced{color:#86efac;border-color:rgba(52,211,153,.20)}
+    .sync-status.synced .sync-dot{background:#34d399;box-shadow:0 0 10px rgba(52,211,153,.55)}
+    .sync-status.error{color:#fda4af;border-color:rgba(251,113,133,.23)}
+    .sync-status.error .sync-dot{background:#fb7185;box-shadow:0 0 10px rgba(251,113,133,.45)}
+    .sync-status.local{color:#94a3b8}
+    @keyframes pulseSync{50%{opacity:.35}}
+    .settings-section{padding:2px 0 18px;margin-bottom:16px;border-bottom:1px solid rgba(255,255,255,.07)}
+    .settings-section:last-of-type{border-bottom:0;margin-bottom:0}
+    .settings-title{font-family:Oxanium,sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#cbd5e1;margin-bottom:9px;display:flex;align-items:center;gap:8px}
+    .settings-title .mini-dot{width:7px;height:7px;border-radius:50%;background:#64748b}
+    .settings-title .mini-dot.ok{background:#34d399;box-shadow:0 0 9px rgba(52,211,153,.5)}
+    .repo-chip{margin-top:9px;padding:9px 11px;border:1px solid rgba(34,211,238,.15);background:rgba(34,211,238,.05);border-radius:10px;color:#8fa6c5;font-size:10px;line-height:1.5}
+    .sync-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 
     .queues{min-height:0;overflow:auto;scrollbar-width:thin;scrollbar-color:#242f52 transparent;padding-right:2px;display:grid;grid-template-rows:minmax(292px,1fr) minmax(292px,1fr) 205px;gap:14px}
     .queue-section{border-radius:22px;background:linear-gradient(180deg,rgba(8,13,32,.93),rgba(6,11,27,.96));min-height:0;display:grid;grid-template-rows:62px 1fr;overflow:hidden;position:relative}
@@ -217,6 +235,13 @@
       body{overflow:auto}
       .app{height:auto;min-height:100vh;grid-template-columns:250px minmax(720px,1fr)}
       .search-results{right:8px}
+      .sync-status{min-width:110px}
+    }
+    @media (max-width:760px){
+      .addbar{grid-template-columns:minmax(0,1fr) auto auto}
+      .addbar #exportBtn,.addbar #importBtn{display:none}
+      .sync-status{grid-column:1/-1;width:100%;height:30px}
+      .search-results{left:8px;right:8px;top:106px}
     }
   </style>
 </head>
@@ -243,7 +268,9 @@
         <span class="search-icon">＋</span>
         <input id="gameSearch" autocomplete="off" placeholder="Digite o nome de um jogo para adicionar..." />
       </div>
-      <button class="toolbar-btn" id="apiKeyBtn"><span class="key-dot" id="keyDot"></span> API</button>
+      <button class="toolbar-btn" id="apiKeyBtn"><span class="key-dot" id="keyDot"></span> ⚙ Configurações</button>
+      <button class="toolbar-btn" id="syncNowBtn">↻ Sincronizar</button>
+      <div class="sync-status local" id="syncStatus" title="Status da sincronização"><span class="sync-dot"></span><span id="syncStatusText">GitHub não conectado</span></div>
       <button class="toolbar-btn" id="exportBtn">⇩ Exportar</button>
       <button class="toolbar-btn" id="importBtn">⇧ Importar</button>
       <input type="file" id="importFile" accept="application/json" hidden>
@@ -286,11 +313,22 @@
 
 <div class="modal-backdrop" id="keyModal">
   <div class="modal">
-    <div class="modal-head"><div class="modal-title">Configurar RAWG API</div><button class="close-btn" data-close="keyModal">×</button></div>
+    <div class="modal-head"><div class="modal-title">Configurações</div><button class="close-btn" data-close="keyModal">×</button></div>
     <div class="modal-body">
-      <input class="key-input" id="apiKeyInput" type="password" placeholder="Cole sua API key aqui" />
-      <div class="help">A chave fica somente no <strong>localStorage</strong> deste navegador e não é gravada no HTML. Obtenha sua chave em <a href="https://rawg.io/apidocs" target="_blank" rel="noreferrer">RAWG API Docs</a>.</div>
-      <div class="modal-actions"><button class="secondary-btn" id="clearKeyBtn">Remover chave</button><button class="primary-btn" id="saveKeyBtn">Salvar</button></div>
+      <div class="settings-section">
+        <div class="settings-title"><span class="mini-dot" id="rawgSettingsDot"></span> Metadata · RAWG</div>
+        <input class="key-input" id="apiKeyInput" type="password" autocomplete="off" placeholder="RAWG API key" />
+        <div class="help">Usada somente para buscar nomes, capas e plataformas. A chave continua salva apenas neste navegador e não vai para o GitHub.</div>
+        <div class="sync-actions"><button class="secondary-btn" id="clearKeyBtn">Remover RAWG</button></div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-title"><span class="mini-dot" id="githubSettingsDot"></span> Sincronização · GitHub</div>
+        <input class="key-input" id="githubTokenInput" type="password" autocomplete="off" placeholder="Fine-grained GitHub token" />
+        <div class="repo-chip"><strong>Repositório:</strong> Teles-Gui/Backlog · <strong>Branch:</strong> main · <strong>Arquivo:</strong> games.json</div>
+        <div class="help">O token precisa ter acesso somente ao repositório <strong>Backlog</strong> e permissão <strong>Contents: Read and write</strong>. Ele fica apenas neste navegador. Cadastre uma vez em cada aparelho que poderá editar.</div>
+        <div class="sync-actions"><button class="secondary-btn" id="clearGithubBtn">Desconectar GitHub</button><button class="secondary-btn" id="testGithubBtn">Testar conexão</button></div>
+      </div>
+      <div class="modal-actions"><button class="secondary-btn" data-close="keyModal">Cancelar</button><button class="primary-btn" id="saveKeyBtn">Salvar configurações</button></div>
     </div>
   </div>
 </div>
@@ -333,8 +371,15 @@
 
 <script>
 (() => {
-  const STORAGE_KEY = 'cyberGameBacklog.v2';
+  const STORAGE_KEY = 'cyberGameBacklog.v3';
+  const DIRTY_KEY = 'cyberGameBacklog.v3.dirty';
   const API_KEY_STORAGE = 'cyberGameBacklog.rawgKey';
+  const GITHUB_TOKEN_STORAGE = 'cyberGameBacklog.githubToken';
+  const GITHUB_OWNER = 'Teles-Gui';
+  const GITHUB_REPO = 'Backlog';
+  const GITHUB_BRANCH = 'main';
+  const GITHUB_FILE = 'games.json';
+  const GITHUB_CONTENTS_URL = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FILE}`;
   const REMOTE_DATA_URL = './games.json';
 
   const platformCatalog = [
@@ -354,6 +399,11 @@
   let selectedDestination = 'backlog';
   let activeGameId = null;
   let editingGameId = null;
+  let remoteSha = null;
+  let syncTimer = null;
+  let syncing = false;
+  let pendingSync = false;
+  let remoteConflict = false;
 
   const el = id => document.getElementById(id);
   const esc = s => String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
@@ -386,19 +436,142 @@
     return out;
   }
 
+  function githubToken(){ return localStorage.getItem(GITHUB_TOKEN_STORAGE) || ''; }
+
+  function githubHeaders(includeJson=false){
+    const h = { 'Accept':'application/vnd.github+json', 'X-GitHub-Api-Version':'2022-11-28' };
+    const token = githubToken();
+    if(token) h['Authorization'] = `Bearer ${token}`;
+    if(includeJson) h['Content-Type']='application/json';
+    return h;
+  }
+
+  function base64ToUtf8(b64){
+    const binary=atob(String(b64||'').replace(/\n/g,''));
+    const bytes=Uint8Array.from(binary,c=>c.charCodeAt(0));
+    return new TextDecoder().decode(bytes);
+  }
+
+  function utf8ToBase64(str){
+    const bytes=new TextEncoder().encode(str);
+    let binary='';
+    const chunk=0x8000;
+    for(let i=0;i<bytes.length;i+=chunk) binary += String.fromCharCode(...bytes.subarray(i,i+chunk));
+    return btoa(binary);
+  }
+
+  async function fetchGithubFile(){
+    const url=`${GITHUB_CONTENTS_URL}?ref=${encodeURIComponent(GITHUB_BRANCH)}&_=${Date.now()}`;
+    const res=await fetch(url,{headers:githubHeaders(),cache:'no-store'});
+    if(!res.ok){
+      const detail=await res.json().catch(()=>({}));
+      const err=new Error(detail.message||`GitHub ${res.status}`); err.status=res.status; throw err;
+    }
+    const data=await res.json();
+    return { sha:data.sha, state:normalizeState(JSON.parse(base64ToUtf8(data.content))) };
+  }
+
   async function loadState(){
-    const local = localStorage.getItem(STORAGE_KEY);
-    if(local){ try{ state = normalizeState(JSON.parse(local)); renderAll(); return; }catch(e){} }
+    setSyncStatus('saving','Carregando GitHub…');
     try{
-      const res = await fetch(REMOTE_DATA_URL,{cache:'no-store'});
-      if(res.ok){ state = normalizeState(await res.json()); saveState(false); }
-    }catch(e){}
+      const remote=await fetchGithubFile();
+      remoteSha=remote.sha; state=remote.state;
+      localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
+      localStorage.removeItem(DIRTY_KEY);
+      renderAll();
+      setSyncStatus(githubToken()?'synced':'local',githubToken()?'✓ Sincronizado':'Somente leitura');
+      return;
+    }catch(err){
+      console.warn('Falha ao carregar GitHub; usando cache local.',err);
+    }
+    const local=localStorage.getItem(STORAGE_KEY);
+    if(local){ try{ state=normalizeState(JSON.parse(local)); }catch(e){} }
+    else {
+      try{ const res=await fetch(`${REMOTE_DATA_URL}?_=${Date.now()}`,{cache:'no-store'}); if(res.ok) state=normalizeState(await res.json()); }catch(e){}
+    }
     renderAll();
+    setSyncStatus('error','Offline · dados locais');
   }
 
   function saveState(show=false){
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    if(show) toast('Alterações salvas neste navegador.');
+    localStorage.setItem(DIRTY_KEY,'1');
+    if(show) toast('Alteração salva localmente.');
+    scheduleGithubSync();
+  }
+
+  function scheduleGithubSync(){
+    clearTimeout(syncTimer);
+    if(!githubToken()){ setSyncStatus('local','GitHub não conectado'); return; }
+    setSyncStatus('saving','Salvando…');
+    syncTimer=setTimeout(()=>syncToGithub(false),1200);
+  }
+
+  function setSyncStatus(kind,text){
+    const box=el('syncStatus'); if(!box)return;
+    box.className=`sync-status ${kind}`;
+    el('syncStatusText').textContent=text;
+  }
+
+  async function syncToGithub(force=false){
+    if(syncing){ pendingSync=true; return; }
+    const token=githubToken();
+    if(!token){ setSyncStatus('local','GitHub não conectado'); openSettingsGithub(); return; }
+    syncing=true; pendingSync=false; setSyncStatus('saving','Salvando…');
+    try{
+      const latest=await fetchGithubFile();
+      if(remoteSha && latest.sha!==remoteSha && !force){
+        remoteConflict=true;
+        setSyncStatus('error','Conflito entre aparelhos');
+        toast('O GitHub mudou em outro aparelho. Clique em Sincronizar para escolher como continuar.');
+        return;
+      }
+      const content=utf8ToBase64(JSON.stringify(state,null,2)+'\n');
+      const res=await fetch(GITHUB_CONTENTS_URL,{
+        method:'PUT', headers:githubHeaders(true),
+        body:JSON.stringify({
+          message:`Atualiza backlog · ${new Date().toLocaleString('pt-BR')}`,
+          content, sha:latest.sha, branch:GITHUB_BRANCH
+        })
+      });
+      if(!res.ok){ const detail=await res.json().catch(()=>({})); throw new Error(detail.message||`GitHub ${res.status}`); }
+      const data=await res.json();
+      remoteSha=data.content?.sha || data.commit?.sha || null;
+      remoteConflict=false; localStorage.removeItem(DIRTY_KEY);
+      setSyncStatus('synced','✓ Sincronizado');
+    }catch(err){
+      console.error('Erro de sincronização GitHub',err);
+      setSyncStatus('error','⚠ Erro ao sincronizar');
+      toast(err.message?.includes('Bad credentials')?'Token do GitHub inválido ou expirado.':'Não foi possível sincronizar com o GitHub.');
+    }finally{
+      syncing=false;
+      if(pendingSync){ pendingSync=false; scheduleGithubSync(); }
+    }
+  }
+
+  async function manualSync(){
+    if(!githubToken()){ openSettingsGithub(); return; }
+    if(remoteConflict){
+      const overwrite=confirm('O arquivo mudou em outro dispositivo.\n\nOK = manter ESTE aparelho e sobrescrever o GitHub.\nCancelar = baixar a versão mais recente do GitHub.');
+      if(overwrite){ await syncToGithub(true); }
+      else {
+        try{ const remote=await fetchGithubFile(); state=remote.state; remoteSha=remote.sha; remoteConflict=false; localStorage.setItem(STORAGE_KEY,JSON.stringify(state)); localStorage.removeItem(DIRTY_KEY); renderAll(); setSyncStatus('synced','✓ Sincronizado'); toast('Versão mais recente do GitHub carregada.'); }
+        catch(e){ setSyncStatus('error','⚠ Erro ao sincronizar'); toast('Não consegui carregar o GitHub.'); }
+      }
+      return;
+    }
+    if(localStorage.getItem(DIRTY_KEY)==='1') await syncToGithub(false);
+    else {
+      try{ const remote=await fetchGithubFile(); state=remote.state; remoteSha=remote.sha; localStorage.setItem(STORAGE_KEY,JSON.stringify(state)); renderAll(); setSyncStatus('synced','✓ Sincronizado'); toast('Tudo está atualizado.'); }
+      catch(e){ setSyncStatus('error','⚠ Erro ao sincronizar'); toast('Não consegui consultar o GitHub.'); }
+    }
+  }
+
+  function openSettingsGithub(){
+    el('apiKeyInput').value=localStorage.getItem(API_KEY_STORAGE)||'';
+    el('githubTokenInput').value=githubToken();
+    updateKeyIndicator(); openModal('keyModal');
+    setTimeout(()=>el('githubTokenInput').focus(),80);
   }
 
   function iconSVG(type){
@@ -590,11 +763,33 @@
     el('gameSearch').value=''; closeModal('addModal'); toast(`${selectedSearchGame.name} adicionado.`);
   });
 
-  // API key modal
-  el('apiKeyBtn').addEventListener('click',()=>{el('apiKeyInput').value=localStorage.getItem(API_KEY_STORAGE)||'';openModal('keyModal');});
-  el('saveKeyBtn').addEventListener('click',()=>{const v=el('apiKeyInput').value.trim();if(v)localStorage.setItem(API_KEY_STORAGE,v);else localStorage.removeItem(API_KEY_STORAGE);updateKeyIndicator();closeModal('keyModal');toast(v?'API key salva neste navegador.':'API key removida.');});
-  el('clearKeyBtn').addEventListener('click',()=>{localStorage.removeItem(API_KEY_STORAGE);el('apiKeyInput').value='';updateKeyIndicator();toast('API key removida.');});
-  function updateKeyIndicator(){el('keyDot').classList.toggle('ok',!!localStorage.getItem(API_KEY_STORAGE));}
+  // Settings: RAWG + GitHub
+  el('apiKeyBtn').addEventListener('click',()=>{el('apiKeyInput').value=localStorage.getItem(API_KEY_STORAGE)||'';el('githubTokenInput').value=githubToken();updateKeyIndicator();openModal('keyModal');});
+  el('saveKeyBtn').addEventListener('click',async()=>{
+    const rawg=el('apiKeyInput').value.trim();
+    const gh=el('githubTokenInput').value.trim();
+    if(rawg)localStorage.setItem(API_KEY_STORAGE,rawg);else localStorage.removeItem(API_KEY_STORAGE);
+    if(gh)localStorage.setItem(GITHUB_TOKEN_STORAGE,gh);else localStorage.removeItem(GITHUB_TOKEN_STORAGE);
+    updateKeyIndicator();closeModal('keyModal');
+    if(gh){toast('Configurações salvas. Sincronizando…');localStorage.setItem(DIRTY_KEY,'1');await syncToGithub(false);} else {setSyncStatus('local','GitHub não conectado');toast('Configurações salvas neste navegador.');}
+  });
+  el('clearKeyBtn').addEventListener('click',()=>{localStorage.removeItem(API_KEY_STORAGE);el('apiKeyInput').value='';updateKeyIndicator();toast('RAWG removida deste navegador.');});
+  el('clearGithubBtn').addEventListener('click',()=>{localStorage.removeItem(GITHUB_TOKEN_STORAGE);el('githubTokenInput').value='';updateKeyIndicator();setSyncStatus('local','GitHub não conectado');toast('GitHub desconectado deste navegador.');});
+  el('testGithubBtn').addEventListener('click',async()=>{
+    const candidate=el('githubTokenInput').value.trim();
+    if(!candidate){toast('Cole o token do GitHub primeiro.');return;}
+    const old=githubToken(); localStorage.setItem(GITHUB_TOKEN_STORAGE,candidate);
+    try{const remote=await fetchGithubFile();remoteSha=remote.sha;toast('Conexão com GitHub funcionando.');}
+    catch(e){toast('Não consegui acessar o GitHub com esse token.');if(old)localStorage.setItem(GITHUB_TOKEN_STORAGE,old);else localStorage.removeItem(GITHUB_TOKEN_STORAGE);}
+    updateKeyIndicator();
+  });
+  function updateKeyIndicator(){
+    const rawg=!!localStorage.getItem(API_KEY_STORAGE), gh=!!githubToken();
+    el('keyDot').classList.toggle('ok',rawg && gh);
+    el('rawgSettingsDot')?.classList.toggle('ok',rawg);
+    el('githubSettingsDot')?.classList.toggle('ok',gh);
+  }
+  el('syncNowBtn').addEventListener('click',manualSync);
 
   // Context menu
   document.addEventListener('click',e=>{
@@ -625,6 +820,7 @@
   let toastTimer;
   function toast(msg){clearTimeout(toastTimer);const t=el('toast');t.textContent=msg;t.classList.add('show');toastTimer=setTimeout(()=>t.classList.remove('show'),2300);}
 
+  updateKeyIndicator();
   loadState();
 })();
 </script>
