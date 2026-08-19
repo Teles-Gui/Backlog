@@ -279,26 +279,6 @@
       ],
       "metadataUpdatedAt": "2026-08-19T16:50:36.427Z"
     },
-    "resident-evil-7": {
-      "id": "resident-evil-7",
-      "name": "Resident Evil 7: Biohazard",
-      "image": "https://media.rawg.io/media/games/cee/cee577e2097a59b77193fe2bce94667d.jpg",
-      "ownedPlatforms": [
-        "ps5"
-      ],
-      "metadataPending": false,
-      "rawgId": 480,
-      "released": "2017-01-23",
-      "rating": 4.33,
-      "availablePlatforms": [
-        "PC",
-        "Xbox One",
-        "PlayStation 4",
-        "Nintendo Switch",
-        "macOS"
-      ],
-      "metadataUpdatedAt": "2026-08-19T16:50:36.987Z"
-    },
     "resident-evil-3": {
       "id": "resident-evil-3",
       "name": "Resident Evil 3",
@@ -535,7 +515,6 @@
     "blood-of-dawnwalker",
     "resident-evil-4",
     "resident-evil-2-remake",
-    "resident-evil-7",
     "resident-evil-3",
     "pacific-drive",
     "signalis",
