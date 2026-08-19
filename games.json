@@ -1,5 +1,8 @@
 {
-  "version": 2,
+  "version": 3,
+  "appConfig": {
+    "rawgProxyUrl": "https://backlog-rawg-proxy.guilherme-teles.workers.dev"
+  },
   "games": {
     "mafia-old-country": {
       "id": "mafia-old-country",
