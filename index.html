@@ -194,6 +194,27 @@
     .completed-card .card-name{font-size:10px}
     .completed-empty{width:100%;min-width:100%;border:1px dashed rgba(52,211,153,.14);border-radius:12px;display:grid;place-items:center;text-align:center;color:#587b76;font-size:11px;line-height:1.45;padding:18px}
 
+    /* ENRICHMENT */
+    .enrich-modal{width:min(680px,100%)}
+    .enrich-progress-head{display:flex;justify-content:space-between;gap:16px;align-items:center;color:#b8c7e4;font-size:12px;font-weight:800}
+    .enrich-progress-head strong{font-family:Oxanium,sans-serif;color:#67e8f9;font-size:11px}
+    .enrich-track{height:7px;background:#070d20;border:1px solid rgba(255,255,255,.08);border-radius:999px;overflow:hidden;margin:10px 0 14px}
+    .enrich-bar{width:0;height:100%;background:linear-gradient(90deg,#8b5cf6,#22d3ee);box-shadow:0 0 18px rgba(34,211,238,.35);transition:width .25s ease}
+    .enrich-current{border:1px solid rgba(255,255,255,.08);background:rgba(5,11,27,.7);border-radius:12px;padding:13px 14px;color:#9cabc8;font-size:11px;line-height:1.5}
+    .enrich-current strong{color:#fff}
+    .enrich-resolve{margin-top:14px}
+    .enrich-question{font-size:13px;font-weight:800;color:#e5edff;margin-bottom:10px}
+    .enrich-candidates{display:grid;gap:8px;max-height:330px;overflow:auto;padding-right:2px}
+    .enrich-candidate{display:grid;grid-template-columns:92px 1fr auto;align-items:center;gap:11px;border:1px solid rgba(255,255,255,.09);background:#081127;border-radius:12px;padding:7px;cursor:pointer;color:#cbd7ef;text-align:left}
+    .enrich-candidate:hover{border-color:rgba(34,211,238,.48);background:#0a1632}
+    .enrich-candidate img{width:92px;height:58px;object-fit:cover;border-radius:8px;background:#10182f}
+    .enrich-candidate-name{font-weight:800;font-size:12px;color:#fff;line-height:1.25}
+    .enrich-candidate-meta{font-size:9px;color:#7586a5;margin-top:4px;line-height:1.35}
+    .enrich-use{font-family:Oxanium,sans-serif;font-size:9px;color:#67e8f9;white-space:nowrap;padding-right:4px}
+    .enrich-skip{margin-top:10px}
+    .enrich-summary{margin-top:14px;border:1px solid rgba(52,211,153,.22);background:rgba(52,211,153,.06);border-radius:12px;padding:14px;color:#a7f3d0;font-size:12px;line-height:1.55}
+    @media(max-width:700px){.enrich-candidate{grid-template-columns:72px 1fr}.enrich-candidate img{width:72px;height:54px}.enrich-use{display:none}.enrich-candidates{max-height:42vh}}
+
     /* MODAL */
     .modal-backdrop{position:fixed;inset:0;background:rgba(2,4,12,.74);backdrop-filter:blur(8px);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
     .modal-backdrop.open{display:flex}
@@ -441,10 +462,10 @@
     <div class="modal-head"><div class="modal-title">Configurações</div><button class="close-btn" data-close="keyModal">×</button></div>
     <div class="modal-body">
       <div class="settings-section">
-        <div class="settings-title"><span class="mini-dot" id="rawgSettingsDot"></span> Metadata · RAWG</div>
-        <input class="key-input" id="apiKeyInput" type="password" autocomplete="off" placeholder="RAWG API key" />
-        <div class="help">Usada somente para buscar nomes, capas e plataformas. A chave continua salva apenas neste navegador e não vai para o GitHub.</div>
-        <div class="sync-actions"><button class="secondary-btn" id="clearKeyBtn">Remover RAWG</button></div>
+        <div class="settings-title"><span class="mini-dot" id="rawgSettingsDot"></span> Metadata · RAWG via Cloudflare</div>
+        <input class="key-input" id="rawgProxyInput" type="url" autocomplete="off" placeholder="https://seu-worker.workers.dev" />
+        <div class="help">A chave RAWG fica protegida no Cloudflare Worker. Este endereço é público e pode ser salvo no GitHub para funcionar automaticamente em qualquer aparelho. Dados de jogos fornecidos por <a href="https://rawg.io" target="_blank" rel="noopener">RAWG</a>.</div>
+        <div class="sync-actions"><button class="secondary-btn" id="testRawgBtn">Testar RAWG</button><button class="primary-btn" id="enrichLibraryBtn">✦ Enriquecer biblioteca</button></div>
       </div>
       <div class="settings-section">
         <div class="settings-title"><span class="mini-dot" id="githubSettingsDot"></span> Sincronização · GitHub</div>
@@ -479,6 +500,25 @@
   </div>
 </div>
 
+<div class="modal-backdrop" id="enrichModal">
+  <div class="modal enrich-modal">
+    <div class="modal-head"><div class="modal-title">Enriquecer biblioteca</div><button class="close-btn" id="enrichCloseBtn">×</button></div>
+    <div class="modal-body">
+      <div class="enrich-progress-head"><span id="enrichProgressText">Preparando…</span><strong id="enrichProgressCount">0 / 0</strong></div>
+      <div class="enrich-track"><div class="enrich-bar" id="enrichProgressBar"></div></div>
+      <div class="enrich-current" id="enrichCurrent">Vou procurar na RAWG os jogos que ainda não têm metadata.</div>
+      <div class="enrich-resolve" id="enrichResolve" hidden>
+        <div class="field-label">Preciso da sua confirmação</div>
+        <div class="enrich-question" id="enrichQuestion"></div>
+        <div class="enrich-candidates" id="enrichCandidates"></div>
+        <button class="secondary-btn enrich-skip" id="enrichSkipBtn">Pular este jogo</button>
+      </div>
+      <div class="enrich-summary" id="enrichSummary" hidden></div>
+      <div class="modal-actions"><button class="secondary-btn" id="enrichCancelBtn">Cancelar</button><button class="primary-btn" id="enrichDoneBtn" style="display:none">Concluir</button></div>
+    </div>
+  </div>
+</div>
+
 <div class="modal-backdrop" id="platformModal">
   <div class="modal">
     <div class="modal-head"><div class="modal-title">Editar plataformas</div><button class="close-btn" data-close="platformModal">×</button></div>
@@ -504,8 +544,9 @@
 (() => {
   const STORAGE_KEY = 'cyberGameBacklog.v3';
   const DIRTY_KEY = 'cyberGameBacklog.v3.dirty';
-  const API_KEY_STORAGE = 'cyberGameBacklog.rawgKey';
   const GITHUB_TOKEN_STORAGE = 'cyberGameBacklog.githubToken';
+  // Remove a chave RAWG legada: a versão atual usa o Cloudflare Worker.
+  localStorage.removeItem('cyberGameBacklog.rawgKey');
   const GITHUB_OWNER = 'Teles-Gui';
   const GITHUB_REPO = 'Backlog';
   const GITHUB_BRANCH = 'main';
@@ -521,7 +562,7 @@
     { id:'xbox', label:'Xbox', icon:'controller' }
   ];
 
-  const blankState = () => ({ version:2, games:{}, backlog:[], queues:{ ps5General:[], ps5Stella:[], allyPower:[], allyPortable:[] }, completed:[] });
+  const blankState = () => ({ version:3, appConfig:{ rawgProxyUrl:'' }, games:{}, backlog:[], queues:{ ps5General:[], ps5Stella:[], allyPower:[], allyPortable:[] }, completed:[] });
   let state = blankState();
   let searchTimer = null;
   let currentSearchResults = [];
@@ -535,6 +576,9 @@
   let syncing = false;
   let pendingSync = false;
   let remoteConflict = false;
+  let enrichmentBusy = false;
+  let enrichmentCancelled = false;
+  let enrichChoiceResolver = null;
 
   const el = id => document.getElementById(id);
   const esc = s => String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
@@ -544,7 +588,8 @@
     const base = blankState();
     if(!raw || typeof raw !== 'object') return base;
     const out = {
-      version:2,
+      version:3,
+      appConfig: { ...base.appConfig, ...(raw.appConfig || {}) },
       games: raw.games && typeof raw.games === 'object' ? raw.games : {},
       backlog: Array.isArray(raw.backlog) ? raw.backlog : [],
       queues: { ...base.queues, ...(raw.queues || {}) },
@@ -699,7 +744,7 @@
   }
 
   function openSettingsGithub(){
-    el('apiKeyInput').value=localStorage.getItem(API_KEY_STORAGE)||'';
+    el('rawgProxyInput').value=rawgProxyUrl();
     el('githubTokenInput').value=githubToken();
     updateKeyIndicator(); openModal('keyModal');
     setTimeout(()=>el('githubTokenInput').focus(),80);
@@ -831,6 +876,155 @@
     saveState(); renderAll();
   }
 
+  // Bulk metadata enrichment via RAWG
+  const enrichmentHints = {
+    'resident-evil-4': { year:2023 },
+    'resident-evil-2-remake': { year:2019 },
+    'resident-evil-3': { year:2020 }
+  };
+
+  function normalizeGameTitle(value){
+    return String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
+      .replace(/&/g,' and ').replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
+  }
+
+  function tokenSimilarity(a,b){
+    const A=new Set(normalizeGameTitle(a).split(' ').filter(Boolean));
+    const B=new Set(normalizeGameTitle(b).split(' ').filter(Boolean));
+    if(!A.size || !B.size) return 0;
+    let common=0; A.forEach(x=>{if(B.has(x)) common++;});
+    return common/Math.max(A.size,B.size);
+  }
+
+  function candidateScore(game,candidate){
+    const a=normalizeGameTitle(game.name), b=normalizeGameTitle(candidate.name);
+    let score=tokenSimilarity(a,b)*55;
+    if(a===b) score+=55;
+    else if(a.includes(b)||b.includes(a)) score+=30;
+    const hint=enrichmentHints[game.id];
+    if(hint?.year && candidate.released){
+      const y=Number(String(candidate.released).slice(0,4));
+      const diff=Math.abs(y-hint.year);
+      if(diff===0) score+=45; else if(diff===1) score+=10; else if(diff>=3) score-=25;
+    }
+    const plats=(candidate.availablePlatforms||[]).map(x=>String(x).toLowerCase());
+    if((game.ownedPlatforms||[]).includes('ps5') && plats.some(x=>x.includes('playstation 5'))) score+=7;
+    if((game.ownedPlatforms||[]).includes('rog') && plats.some(x=>x==='pc')) score+=7;
+    return score;
+  }
+
+  function rawgProxyUrl(){
+    return String(state.appConfig?.rawgProxyUrl || '').trim().replace(/\/+$/,'');
+  }
+
+  async function rawgFetchGames(query){
+    const proxy=rawgProxyUrl();
+    if(!proxy) throw new Error('RAWG_PROXY_NOT_CONFIGURED');
+    const url=`${proxy}/games?search=${encodeURIComponent(query)}&search_precise=true&page_size=8`;
+    const res=await fetch(url,{headers:{'Accept':'application/json'}});
+    if(!res.ok){
+      let detail={}; try{detail=await res.json();}catch(e){}
+      throw new Error(detail.error || detail.message || `RAWG proxy ${res.status}`);
+    }
+    return await res.json();
+  }
+
+  async function rawgCandidates(query){
+    const data=await rawgFetchGames(query);
+    return (data.results||[]).map(g=>({
+      rawgId:g.id, name:g.name, image:g.background_image||'', released:g.released||'', rating:g.rating||null,
+      availablePlatforms:(g.platforms||[]).map(x=>x.platform?.name).filter(Boolean)
+    }));
+  }
+
+  function chooseAutomaticCandidate(game,candidates){
+    if(!candidates.length) return null;
+    const ranked=candidates.map(c=>({c,score:candidateScore(game,c)})).sort((x,y)=>y.score-x.score);
+    const best=ranked[0], second=ranked[1];
+    const a=normalizeGameTitle(game.name), b=normalizeGameTitle(best.c.name);
+    const hint=enrichmentHints[game.id];
+    if(hint?.year && Number(String(best.c.released||'').slice(0,4))===hint.year && best.score>=80) return best.c;
+    if(a===b && (!second || best.score-second.score>=10)) return best.c;
+    if(best.score>=92 && (!second || best.score-second.score>=15)) return best.c;
+    return null;
+  }
+
+  function applyRawgMetadata(game,candidate){
+    const duplicate=Object.values(state.games).find(g=>g.id!==game.id && String(g.rawgId||'')===String(candidate.rawgId));
+    if(duplicate) return false;
+    game.rawgId=candidate.rawgId;
+    game.name=candidate.name || game.name;
+    if(candidate.image) game.image=candidate.image;
+    game.released=candidate.released||game.released||'';
+    game.rating=candidate.rating??game.rating??null;
+    game.availablePlatforms=candidate.availablePlatforms||[];
+    game.metadataPending=false;
+    game.metadataUpdatedAt=new Date().toISOString();
+    return true;
+  }
+
+  function updateEnrichProgress(done,total,text){
+    el('enrichProgressCount').textContent=`${done} / ${total}`;
+    el('enrichProgressText').textContent=text;
+    el('enrichProgressBar').style.width=`${total?Math.round(done/total*100):0}%`;
+  }
+
+  function askEnrichmentChoice(game,candidates){
+    el('enrichResolve').hidden=false;
+    el('enrichQuestion').textContent=`Qual resultado corresponde a “${game.name}”?`;
+    el('enrichCandidates').innerHTML=candidates.slice(0,6).map((c,i)=>`<button class="enrich-candidate" data-enrich-choice="${i}"><img src="${esc(gameImage(c))}" alt=""><div><div class="enrich-candidate-name">${esc(c.name)}</div><div class="enrich-candidate-meta">${esc(c.released?c.released.slice(0,4):'Ano não informado')} · ${esc((c.availablePlatforms||[]).slice(0,5).join(' · '))}</div></div><span class="enrich-use">USAR →</span></button>`).join('') || '<div class="search-message">A RAWG não encontrou um resultado confiável para este jogo.</div>';
+    return new Promise(resolve=>{ enrichChoiceResolver={resolve,candidates}; });
+  }
+
+  async function startLibraryEnrichment(){
+    if(enrichmentBusy) return;
+    if(!rawgProxyUrl()){ toast('Configure o endereço do Worker RAWG primeiro.'); openModal('keyModal'); return; }
+    const targets=Object.values(state.games).filter(g=>g.metadataPending || !g.rawgId || !g.image);
+    if(!targets.length){ toast('Sua biblioteca já está enriquecida.'); return; }
+    closeModal('keyModal'); openModal('enrichModal');
+    enrichmentBusy=true; enrichmentCancelled=false; enrichChoiceResolver=null;
+    el('enrichResolve').hidden=true; el('enrichSummary').hidden=true; el('enrichDoneBtn').style.display='none';
+    el('enrichCancelBtn').style.display=''; el('enrichCancelBtn').disabled=false; el('enrichCancelBtn').textContent='Cancelar';
+    let enriched=0, skipped=0, failed=0;
+    updateEnrichProgress(0,targets.length,'Consultando RAWG…');
+    for(let i=0;i<targets.length;i++){
+      if(enrichmentCancelled) break;
+      const game=targets[i];
+      el('enrichCurrent').innerHTML=`Buscando <strong>${esc(game.name)}</strong>…`;
+      updateEnrichProgress(i,targets.length,'Consultando RAWG…');
+      try{
+        const candidates=await rawgCandidates(game.name);
+        if(enrichmentCancelled) break;
+        let chosen=chooseAutomaticCandidate(game,candidates);
+        if(!chosen){
+          updateEnrichProgress(i,targets.length,'Confirmação necessária');
+          chosen=await askEnrichmentChoice(game,candidates);
+          el('enrichResolve').hidden=true;
+          if(enrichmentCancelled) break;
+        }
+        if(chosen){ if(applyRawgMetadata(game,chosen)) enriched++; else skipped++; }
+        else skipped++;
+      }catch(err){ console.warn('Falha ao enriquecer',game.name,err); failed++; }
+      localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
+      updateEnrichProgress(i+1,targets.length,'Consultando RAWG…');
+      await new Promise(r=>setTimeout(r,120));
+    }
+    const processed=enriched+skipped+failed;
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
+    renderAll();
+    if(enriched>0){
+      localStorage.setItem(DIRTY_KEY,'1');
+      setSyncStatus('saving','Salvando metadata…');
+      await syncToGithub(false);
+    }
+    enrichmentBusy=false; enrichChoiceResolver=null;
+    updateEnrichProgress(enrichmentCancelled?processed:targets.length,targets.length,enrichmentCancelled?'Enriquecimento interrompido':'Enriquecimento concluído');
+    el('enrichCurrent').textContent=enrichmentCancelled?'As alterações já concluídas foram preservadas.':'Capas, nomes oficiais e IDs foram atualizados sem alterar suas filas ou plataformas.';
+    el('enrichSummary').hidden=false;
+    el('enrichSummary').innerHTML=`<strong>${enriched}</strong> jogos enriquecidos · <strong>${skipped}</strong> pulados${failed?` · <strong>${failed}</strong> com erro`:''}.`;
+    el('enrichCancelBtn').style.display='none'; el('enrichDoneBtn').style.display='';
+  }
+
   // Search + RAWG
   el('gameSearch').addEventListener('input',()=>{
     clearTimeout(searchTimer);
@@ -841,15 +1035,11 @@
   el('gameSearch').addEventListener('keydown',e=>{ if(e.key==='Enter'){clearTimeout(searchTimer);const q=e.currentTarget.value.trim();if(q.length>=2)searchGames(q);} if(e.key==='Escape')closeSearch(); });
 
   async function searchGames(q){
-    const key=localStorage.getItem(API_KEY_STORAGE);
     const box=el('searchResults'); box.classList.add('open');
-    if(!key){ box.innerHTML='<div class="search-message">Configure sua RAWG API key no botão <strong>API</strong> para ativar a busca na internet.</div>'; return; }
+    if(!rawgProxyUrl()){ box.innerHTML='<div class="search-message">Configure o Worker RAWG em <strong>⚙ Configurações</strong> para ativar a busca na internet.</div>'; return; }
     box.innerHTML='<div class="search-message">Buscando jogos…</div>';
     try{
-      const url=`https://api.rawg.io/api/games?key=${encodeURIComponent(key)}&search=${encodeURIComponent(q)}&search_precise=true&page_size=8`;
-      const res=await fetch(url);
-      if(!res.ok) throw new Error('API '+res.status);
-      const data=await res.json();
+      const data=await rawgFetchGames(q);
       currentSearchResults=(data.results||[]).map(g=>({
         rawgId:g.id,
         name:g.name,
@@ -860,7 +1050,7 @@
       }));
       if(!currentSearchResults.length){ box.innerHTML='<div class="search-message">Nenhum jogo encontrado.</div>'; return; }
       box.innerHTML=currentSearchResults.map((g,i)=>`<div class="search-result" data-result-index="${i}"><img class="result-img" src="${esc(gameImage(g))}" alt=""><div><div class="result-name">${esc(g.name)}</div><div class="result-meta">${esc(g.released ? g.released.slice(0,4) : 'Ano não informado')} · ${esc(g.availablePlatforms.slice(0,5).join(' · '))}</div></div><div class="result-add">ADICIONAR →</div></div>`).join('');
-    }catch(err){ box.innerHTML='<div class="search-message">Não consegui consultar a RAWG. Confira a API key e sua conexão.</div>'; }
+    }catch(err){ console.error('RAWG proxy',err); box.innerHTML='<div class="search-message">Não consegui consultar a RAWG. Verifique o Worker em ⚙ Configurações.</div>'; }
   }
 
   el('searchResults').addEventListener('click',e=>{
@@ -889,23 +1079,62 @@
     if(!selectedSearchGame)return;
     if(!selectedPlatforms.size){toast('Escolha pelo menos uma plataforma.');return;}
     let id='rawg-'+selectedSearchGame.rawgId;
-    if(state.games[id]){ toast('Esse jogo já está na sua biblioteca.'); closeModal('addModal'); return; }
+    const duplicate=Object.values(state.games).find(g=>String(g.rawgId||'')===String(selectedSearchGame.rawgId));
+    if(state.games[id] || duplicate){ toast('Esse jogo já está na sua biblioteca.'); closeModal('addModal'); return; }
     state.games[id]={id,name:selectedSearchGame.name,image:selectedSearchGame.image,rawgId:selectedSearchGame.rawgId,released:selectedSearchGame.released,availablePlatforms:selectedSearchGame.availablePlatforms,ownedPlatforms:[...selectedPlatforms],addedAt:new Date().toISOString()};
     moveGame(id,selectedDestination);
     el('gameSearch').value=''; closeModal('addModal'); toast(`${selectedSearchGame.name} adicionado.`);
   });
 
-  // Settings: RAWG + GitHub
-  el('apiKeyBtn').addEventListener('click',()=>{el('apiKeyInput').value=localStorage.getItem(API_KEY_STORAGE)||'';el('githubTokenInput').value=githubToken();updateKeyIndicator();openModal('keyModal');});
-  el('saveKeyBtn').addEventListener('click',async()=>{
-    const rawg=el('apiKeyInput').value.trim();
-    const gh=el('githubTokenInput').value.trim();
-    if(rawg)localStorage.setItem(API_KEY_STORAGE,rawg);else localStorage.removeItem(API_KEY_STORAGE);
-    if(gh)localStorage.setItem(GITHUB_TOKEN_STORAGE,gh);else localStorage.removeItem(GITHUB_TOKEN_STORAGE);
-    updateKeyIndicator();closeModal('keyModal');
-    if(gh){toast('Configurações salvas. Sincronizando…');localStorage.setItem(DIRTY_KEY,'1');await syncToGithub(false);} else {setSyncStatus('local','GitHub não conectado');toast('Configurações salvas neste navegador.');}
+  // Settings: RAWG via Cloudflare + GitHub
+  el('apiKeyBtn').addEventListener('click',()=>{
+    el('rawgProxyInput').value=rawgProxyUrl();
+    el('githubTokenInput').value=githubToken();
+    updateKeyIndicator();
+    openModal('keyModal');
   });
-  el('clearKeyBtn').addEventListener('click',()=>{localStorage.removeItem(API_KEY_STORAGE);el('apiKeyInput').value='';updateKeyIndicator();toast('RAWG removida deste navegador.');});
+  el('saveKeyBtn').addEventListener('click',async()=>{
+    const rawgProxy=el('rawgProxyInput').value.trim().replace(/\/+$/,'');
+    const gh=el('githubTokenInput').value.trim();
+    const proxyChanged=rawgProxy!==rawgProxyUrl();
+    state.appConfig=state.appConfig||{};
+    state.appConfig.rawgProxyUrl=rawgProxy;
+    if(gh)localStorage.setItem(GITHUB_TOKEN_STORAGE,gh);else localStorage.removeItem(GITHUB_TOKEN_STORAGE);
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
+    if(proxyChanged)localStorage.setItem(DIRTY_KEY,'1');
+    updateKeyIndicator();closeModal('keyModal');
+    if(gh && proxyChanged){toast('Configuração global salva. Sincronizando…');await syncToGithub(false);}
+    else if(gh){toast('Configurações salvas.');}
+    else {setSyncStatus('local','GitHub não conectado');toast('Configuração RAWG salva apenas neste aparelho até conectar o GitHub.');}
+  });
+  el('testRawgBtn').addEventListener('click',async()=>{
+    const candidate=el('rawgProxyInput').value.trim().replace(/\/+$/,'');
+    if(!candidate){toast('Cole o endereço do Worker primeiro.');return;}
+    const previous=state.appConfig?.rawgProxyUrl||'';
+    state.appConfig=state.appConfig||{}; state.appConfig.rawgProxyUrl=candidate;
+    try{
+      const res=await fetch(`${candidate}/health`,{headers:{'Accept':'application/json'}});
+      if(!res.ok)throw new Error(`Worker ${res.status}`);
+      await rawgFetchGames('Hollow Knight');
+      toast('RAWG via Cloudflare funcionando.');
+    }catch(e){toast('Não consegui acessar o Worker RAWG.');}
+    finally{state.appConfig.rawgProxyUrl=previous;updateKeyIndicator();}
+  });
+  el('enrichLibraryBtn').addEventListener('click',startLibraryEnrichment);
+  el('enrichCandidates').addEventListener('click',e=>{
+    const row=e.target.closest('[data-enrich-choice]'); if(!row||!enrichChoiceResolver)return;
+    const holder=enrichChoiceResolver; enrichChoiceResolver=null; holder.resolve(holder.candidates[Number(row.dataset.enrichChoice)]||null);
+  });
+  el('enrichSkipBtn').addEventListener('click',()=>{if(enrichChoiceResolver){const holder=enrichChoiceResolver;enrichChoiceResolver=null;holder.resolve(null);}});
+  el('enrichCancelBtn').addEventListener('click',()=>{
+    if(!enrichmentBusy){closeModal('enrichModal');return;} enrichmentCancelled=true; el('enrichCancelBtn').disabled=true; el('enrichCancelBtn').textContent='Cancelando…';
+    if(enrichChoiceResolver){const holder=enrichChoiceResolver;enrichChoiceResolver=null;holder.resolve(null);}
+  });
+  el('enrichCloseBtn').addEventListener('click',()=>{
+    if(enrichmentBusy){enrichmentCancelled=true;if(enrichChoiceResolver){const holder=enrichChoiceResolver;enrichChoiceResolver=null;holder.resolve(null);}toast('Cancelando enriquecimento…');}
+    else closeModal('enrichModal');
+  });
+  el('enrichDoneBtn').addEventListener('click',()=>closeModal('enrichModal'));
   el('clearGithubBtn').addEventListener('click',()=>{localStorage.removeItem(GITHUB_TOKEN_STORAGE);el('githubTokenInput').value='';updateKeyIndicator();setSyncStatus('local','GitHub não conectado');toast('GitHub desconectado deste navegador.');});
   el('testGithubBtn').addEventListener('click',async()=>{
     const candidate=el('githubTokenInput').value.trim();
@@ -916,7 +1145,7 @@
     updateKeyIndicator();
   });
   function updateKeyIndicator(){
-    const rawg=!!localStorage.getItem(API_KEY_STORAGE), gh=!!githubToken();
+    const rawg=!!rawgProxyUrl(), gh=!!githubToken();
     el('keyDot').classList.toggle('ok',rawg && gh);
     el('rawgSettingsDot')?.classList.toggle('ok',rawg);
     el('githubSettingsDot')?.classList.toggle('ok',gh);
@@ -978,8 +1207,14 @@
   function openModal(id){el(id).classList.add('open');}
   function closeModal(id){el(id).classList.remove('open');}
   document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeModal(b.dataset.close)));
-  document.querySelectorAll('.modal-backdrop').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)closeModal(m.id);}));
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.modal-backdrop.open').forEach(m=>closeModal(m.id));closeSearch();el('contextMenu').classList.remove('open');closeMobileBacklog();}});
+  document.querySelectorAll('.modal-backdrop').forEach(m=>m.addEventListener('click',e=>{
+    if(e.target!==m)return;
+    if(m.id==='enrichModal' && enrichmentBusy) el('enrichCloseBtn').click(); else closeModal(m.id);
+  }));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){
+    document.querySelectorAll('.modal-backdrop.open').forEach(m=>{if(m.id==='enrichModal' && enrichmentBusy) el('enrichCloseBtn').click(); else closeModal(m.id);});
+    closeSearch();el('contextMenu').classList.remove('open');closeMobileBacklog();
+  }});
 
   let toastTimer;
   function toast(msg){clearTimeout(toastTimer);const t=el('toast');t.textContent=msg;t.classList.add('show');toastTimer=setTimeout(()=>t.classList.remove('show'),2300);}
