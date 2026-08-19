@@ -98,24 +98,6 @@
       ],
       "metadataUpdatedAt": "2026-08-19T16:50:30.671Z"
     },
-    "metal-gear-solid-delta": {
-      "id": "metal-gear-solid-delta",
-      "name": "METAL GEAR SOLID Δ: SNAKE EATER",
-      "image": "https://media.rawg.io/media/screenshots/545/545c99afe5196ff73331db34c11bf63d.jpg",
-      "ownedPlatforms": [
-        "ps5"
-      ],
-      "metadataPending": false,
-      "rawgId": 1009602,
-      "released": "2025-08-28",
-      "rating": null,
-      "availablePlatforms": [
-        "PC",
-        "PlayStation 5",
-        "Xbox Series S/X"
-      ],
-      "metadataUpdatedAt": "2026-08-19T16:50:31.296Z"
-    },
     "hell-is-us": {
       "id": "hell-is-us",
       "name": "Hell is Us",
@@ -541,7 +523,6 @@
   },
   "backlog": [
     "assassins-creed-mirage",
-    "metal-gear-solid-delta",
     "hell-is-us",
     "doom-the-dark-ages",
     "indiana-jones-great-circle",
