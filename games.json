@@ -281,10 +281,10 @@
     "industria"
   ],
   "queues": {
-    "ps5General": [
+    "ps5General": [],
+    "ps5Stella": [
       "mafia-old-country"
     ],
-    "ps5Stella": [],
     "allyPower": [
       "clair-obscur-expedition-33"
     ],
