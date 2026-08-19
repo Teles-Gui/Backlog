@@ -138,7 +138,7 @@
     .sync-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 
     .queues{min-height:0;overflow:auto;scrollbar-width:thin;scrollbar-color:#242f52 transparent;padding-right:2px;display:grid;grid-template-rows:auto auto auto;gap:14px;align-content:start}
-    .queue-section{border-radius:22px;background:linear-gradient(180deg,rgba(8,13,32,.93),rgba(6,11,27,.96));min-height:392px;display:grid;grid-template-rows:62px auto;overflow:hidden;position:relative}
+    .queue-section{border-radius:22px;background:linear-gradient(180deg,rgba(8,13,32,.93),rgba(6,11,27,.96));min-height:470px;display:grid;grid-template-rows:62px auto;overflow:hidden;position:relative}
     .queue-section.ps5{border:1px solid rgba(168,85,247,.78);box-shadow:var(--glow-purple)}
     .queue-section.ally{border:1px solid rgba(34,211,238,.78);box-shadow:var(--glow-cyan)}
     .section-head{display:flex;align-items:center;gap:13px;padding:0 20px;min-width:0}
@@ -153,8 +153,8 @@
     .section-glyph{font-family:Oxanium,sans-serif;font-size:18px;font-weight:700}
     .ps5 .section-glyph{color:#b067fa}.ally .section-glyph{color:#23d3ed}
 
-    .lanes{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:0 18px 18px;min-height:0}
-    .lane{border-radius:16px;min-width:0;overflow:hidden;display:grid;grid-template-rows:47px 1fr;background:rgba(7,12,30,.70)}
+    .lanes{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:0 18px 18px;min-height:0;align-items:stretch}
+    .lane{border-radius:16px;min-width:0;overflow:hidden;display:grid;grid-template-rows:47px auto;background:rgba(7,12,30,.70)}
     .ps5 .lane{border:1px solid rgba(168,85,247,.20)}
     .ally .lane{border:1px solid rgba(34,211,238,.20)}
     .lane.drag-over{outline:2px dashed currentColor;outline-offset:-5px;background:rgba(255,255,255,.035)}
@@ -164,7 +164,7 @@
     .ps5 .lane.stella .lane-head{color:#ff78c5;background:linear-gradient(90deg,rgba(255,79,179,.17),rgba(255,79,179,.07))}
     .ally .lane-head{color:#61e4f5;background:linear-gradient(90deg,rgba(6,182,212,.17),rgba(6,182,212,.07))}
     .lane-icon{font-size:17px}
-    .lane-body{min-width:0;display:flex;gap:10px;align-items:flex-start;overflow-x:auto;scrollbar-width:none;padding:12px 13px 14px;position:relative}
+    .lane-body{min-width:0;min-height:337px;display:flex;gap:10px;align-items:flex-start;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;padding:12px 13px 14px;position:relative}
     .lane-body::-webkit-scrollbar{display:none}
     .lane-empty{width:100%;min-width:100%;border:1px dashed rgba(255,255,255,.10);border-radius:12px;display:grid;place-items:center;text-align:center;color:#5e6d8c;font-size:11px;line-height:1.45;padding:20px}
     .game-card{flex:0 0 154px;border:1px solid rgba(118,140,187,.30);background:#081127;border-radius:14px;overflow:hidden;cursor:grab;position:relative;transition:.18s ease;box-shadow:0 7px 20px rgba(0,0,0,.22)}
@@ -180,11 +180,11 @@
     .game-card:hover .card-menu{opacity:1}
 
 
-    .queue-section.completed{border:1px solid rgba(52,211,153,.56);box-shadow:0 0 30px rgba(52,211,153,.08);grid-template-rows:58px auto;min-height:345px}
+    .queue-section.completed{border:1px solid rgba(52,211,153,.56);box-shadow:0 0 30px rgba(52,211,153,.08);grid-template-rows:58px auto;min-height:365px}
     .completed .section-icon{color:#6ee7b7;box-shadow:inset 0 0 18px rgba(52,211,153,.11)}
     .completed .head-rule{background:linear-gradient(90deg,rgba(52,211,153,.72),rgba(34,211,238,.30),transparent)}
     .completed .section-glyph{color:#6ee7b7}
-    .completed-body{min-width:0;display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding:10px 14px 14px;align-items:flex-start}
+    .completed-body{min-width:0;display:flex;gap:10px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;padding:10px 14px 14px;align-items:flex-start}
     .completed-body::-webkit-scrollbar{display:none}
     .completed-body.drag-over{outline:2px dashed rgba(52,211,153,.72);outline-offset:-6px;background:rgba(52,211,153,.025)}
     .completed-card{flex:0 0 132px;border:1px solid rgba(52,211,153,.20);background:#071428;border-radius:13px;overflow:hidden;position:relative;cursor:grab;transition:.18s ease}
@@ -341,7 +341,7 @@
       .lane{grid-template-rows:40px auto;min-height:0;border-radius:13px;overflow:hidden}
       .lane-head{height:40px;padding:0 12px;font-size:13px}
       .lane-head:after{width:60px;right:8px}
-      .lane-body{min-height:158px;gap:9px;padding:9px 10px 11px;scroll-snap-type:x proximity;overscroll-behavior-x:contain}
+      .lane-body{min-height:0;height:auto;gap:9px;padding:9px 10px 11px;scroll-snap-type:x proximity;overscroll-behavior-x:contain;overflow-y:hidden}
       .lane-empty{min-height:136px;padding:16px;font-size:10px}
       .game-card{flex:0 0 136px;border-radius:13px;scroll-snap-align:start;cursor:pointer}
       .game-card:hover{transform:none}
