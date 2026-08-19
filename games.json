@@ -546,13 +546,13 @@
     "blasphemous",
     "en-garde",
     "europa",
-    "industria"
+    "industria",
+    "plague-tale-requiem"
   ],
   "queues": {
     "ps5General": [],
     "ps5Stella": [
-      "mafia-old-country",
-      "plague-tale-requiem"
+      "mafia-old-country"
     ],
     "allyPower": [
       "clair-obscur-expedition-33"
