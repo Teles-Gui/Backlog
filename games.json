@@ -7,254 +7,520 @@
     "mafia-old-country": {
       "id": "mafia-old-country",
       "name": "Mafia: The Old Country",
-      "image": "",
+      "image": "https://media.rawg.io/media/games/e0f/e0fc6554b6c0b5cd95037858898a1cc8.jpg",
       "ownedPlatforms": [
         "ps5"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 987515,
+      "released": "2025-08-08",
+      "rating": 3.84,
+      "availablePlatforms": [
+        "PC",
+        "PlayStation 5",
+        "Xbox Series S/X"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:27.385Z"
     },
     "clair-obscur-expedition-33": {
       "id": "clair-obscur-expedition-33",
       "name": "Clair Obscur: Expedition 33",
-      "image": "",
+      "image": "https://media.rawg.io/media/games/466/4667f17fdee9ebbcea2049e54f8e2b96.jpg",
       "ownedPlatforms": [
         "rog"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 983210,
+      "released": "2025-04-24",
+      "rating": 4.45,
+      "availablePlatforms": [
+        "PC",
+        "PlayStation 5",
+        "Xbox Series S/X"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:28.094Z"
     },
     "hollow-knight": {
       "id": "hollow-knight",
       "name": "Hollow Knight",
-      "image": "",
+      "image": "https://media.rawg.io/media/games/4cf/4cfc6b7f1850590a4634b08bfab308ab.jpg",
       "ownedPlatforms": [
         "rog"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 9767,
+      "released": "2017-02-23",
+      "rating": 4.4,
+      "availablePlatforms": [
+        "PC",
+        "Xbox One",
+        "PlayStation 4",
+        "Nintendo Switch",
+        "macOS",
+        "Linux"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:28.225Z"
     },
     "forgive-me-father": {
       "id": "forgive-me-father",
       "name": "Forgive Me Father",
-      "image": "",
+      "image": "https://media.rawg.io/media/games/c7b/c7b853c1a0ffd4f5ea24a263fe895855.jpg",
       "ownedPlatforms": [
         "rog"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 670703,
+      "released": "2022-04-07",
+      "rating": 3.73,
+      "availablePlatforms": [
+        "PC"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:28.741Z"
     },
     "assassins-creed-mirage": {
       "id": "assassins-creed-mirage",
       "name": "Assassin's Creed Mirage",
-      "image": "",
+      "image": "https://media.rawg.io/media/games/fbd/fbd0128013b7965904be571e75fb30c0.jpg",
       "ownedPlatforms": [
         "ps5"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 845261,
+      "released": "2023-10-05",
+      "rating": 3.38,
+      "availablePlatforms": [
+        "PC",
+        "PlayStation 5",
+        "Xbox One",
+        "PlayStation 4",
+        "Xbox Series S/X",
+        "iOS"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:30.671Z"
     },
     "metal-gear-solid-delta": {
       "id": "metal-gear-solid-delta",
       "name": "METAL GEAR SOLID Δ: SNAKE EATER",
-      "image": "",
+      "image": "https://media.rawg.io/media/screenshots/545/545c99afe5196ff73331db34c11bf63d.jpg",
       "ownedPlatforms": [
         "ps5"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 1009602,
+      "released": "2025-08-28",
+      "rating": null,
+      "availablePlatforms": [
+        "PC",
+        "PlayStation 5",
+        "Xbox Series S/X"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:31.296Z"
     },
     "hell-is-us": {
       "id": "hell-is-us",
-      "name": "HELL is US",
-      "image": "",
+      "name": "Hell is Us",
+      "image": "https://media.rawg.io/media/games/60b/60b7561ab47a7c0853ae983d419b47cb.jpg",
       "ownedPlatforms": [
         "ps5"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 782261,
+      "released": "2025-09-04",
+      "rating": 3.5,
+      "availablePlatforms": [
+        "PC",
+        "PlayStation 5",
+        "Xbox Series S/X"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:31.774Z"
     },
     "doom-the-dark-ages": {
       "id": "doom-the-dark-ages",
-      "name": "DOOM: The Dark Ages",
-      "image": "",
+      "name": "Doom: The Dark Ages",
+      "image": "https://media.rawg.io/media/games/018/01897340a06b9ed8e92ed1cc1b1eecb9.jpg",
       "ownedPlatforms": [
         "ps5"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 983381,
+      "released": "2025-05-15",
+      "rating": 4.31,
+      "availablePlatforms": [
+        "PC",
+        "PlayStation 5",
+        "Xbox Series S/X"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:32.681Z"
     },
     "indiana-jones-great-circle": {
       "id": "indiana-jones-great-circle",
       "name": "Indiana Jones and the Great Circle",
-      "image": "",
+      "image": "https://media.rawg.io/media/games/824/824c0f8d6a591ef5828d7546664fc87c.jpg",
       "ownedPlatforms": [
         "ps5"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 975393,
+      "released": "2024-12-09",
+      "rating": 4.29,
+      "availablePlatforms": [
+        "PC",
+        "PlayStation 5",
+        "Xbox Series S/X"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:33.256Z"
     },
     "control-resonant": {
       "id": "control-resonant",
-      "name": "CONTROL Resonant",
-      "image": "",
+      "name": "Control Resonant",
+      "image": "https://media.rawg.io/media/screenshots/5b8/5b812f73e4c5df28630747c52f57170b.jpg",
       "ownedPlatforms": [
         "ps5"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 1015409,
+      "released": "2026-09-24",
+      "rating": 4.22,
+      "availablePlatforms": [
+        "PC",
+        "PlayStation 5",
+        "Xbox Series S/X"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:33.641Z"
     },
     "marvels-wolverine": {
       "id": "marvels-wolverine",
       "name": "Marvel's Wolverine",
-      "image": "",
+      "image": "https://media.rawg.io/media/games/28d/28d61be51ec0411e24c28f71122dcaaf.jpeg",
       "ownedPlatforms": [
         "ps5"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 662318,
+      "released": "2026-09-15",
+      "rating": 4.11,
+      "availablePlatforms": [
+        "PlayStation 5"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:34.245Z"
     },
     "saros": {
       "id": "saros",
-      "name": "SAROS",
-      "image": "",
+      "name": "Saros",
+      "image": "https://media.rawg.io/media/games/be8/be86ee5cf3a427c784efec1661f9b194.jpg",
       "ownedPlatforms": [
         "ps5"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 997551,
+      "released": "2026-04-30",
+      "rating": 3.75,
+      "availablePlatforms": [
+        "PlayStation 5"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:34.720Z"
     },
     "blood-of-dawnwalker": {
       "id": "blood-of-dawnwalker",
-      "name": "The Blood of Dawnwalker",
-      "image": "",
+      "name": "The Blood Of Dawnwalker",
+      "image": "https://media.rawg.io/media/games/319/319d18680fd0233e0ff724f234c97d17.jpg",
       "ownedPlatforms": [
         "ps5"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 996046,
+      "released": "2026-09-03",
+      "rating": 3.57,
+      "availablePlatforms": [
+        "PC",
+        "PlayStation 5",
+        "Xbox Series S/X"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:35.433Z"
     },
     "resident-evil-4": {
       "id": "resident-evil-4",
       "name": "Resident Evil 4",
-      "image": "",
+      "image": "https://media.rawg.io/media/games/51a/51a404b9918a0b19fc704a3ca248c69f.jpg",
       "ownedPlatforms": [
         "ps5"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 795632,
+      "released": "2023-03-24",
+      "rating": 4.56,
+      "availablePlatforms": [
+        "PC",
+        "PlayStation 5",
+        "PlayStation 4",
+        "Xbox Series S/X",
+        "iOS"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:35.912Z"
     },
     "resident-evil-2-remake": {
       "id": "resident-evil-2-remake",
       "name": "Resident Evil 2",
-      "image": "",
+      "image": "https://media.rawg.io/media/games/053/053fc543bf488349610f1ae2d0c1b51b.jpg",
       "ownedPlatforms": [
         "ps5"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 58813,
+      "released": "2019-01-25",
+      "rating": 4.5,
+      "availablePlatforms": [
+        "PC",
+        "PlayStation 5",
+        "Xbox One",
+        "PlayStation 4",
+        "Nintendo Switch",
+        "macOS"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:36.427Z"
     },
     "resident-evil-7": {
       "id": "resident-evil-7",
-      "name": "Resident Evil 7 biohazard",
-      "image": "",
+      "name": "Resident Evil 7: Biohazard",
+      "image": "https://media.rawg.io/media/games/cee/cee577e2097a59b77193fe2bce94667d.jpg",
       "ownedPlatforms": [
         "ps5"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 480,
+      "released": "2017-01-23",
+      "rating": 4.33,
+      "availablePlatforms": [
+        "PC",
+        "Xbox One",
+        "PlayStation 4",
+        "Nintendo Switch",
+        "macOS"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:36.987Z"
     },
     "resident-evil-3": {
       "id": "resident-evil-3",
       "name": "Resident Evil 3",
-      "image": "",
+      "image": "https://media.rawg.io/media/games/a4b/a4bb55f42fe837ae7bf1307e7b41cc85.jpg",
       "ownedPlatforms": [
         "ps5"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 397477,
+      "released": "2020-04-02",
+      "rating": 4.04,
+      "availablePlatforms": [
+        "PC",
+        "PlayStation 5",
+        "Xbox One",
+        "PlayStation 4",
+        "Xbox Series S/X",
+        "Nintendo Switch"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:37.397Z"
     },
     "plague-tale-requiem": {
       "id": "plague-tale-requiem",
       "name": "A Plague Tale: Requiem",
-      "image": "",
+      "image": "https://media.rawg.io/media/games/cd0/cd074f3f6045297cda9ad077273c09b6.jpg",
       "ownedPlatforms": [
         "ps5"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 616697,
+      "released": "2022-10-17",
+      "rating": 4.28,
+      "availablePlatforms": [
+        "PC",
+        "PlayStation 5",
+        "Xbox One",
+        "PlayStation 4",
+        "Xbox Series S/X",
+        "Nintendo Switch"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:37.912Z"
     },
     "pacific-drive": {
       "id": "pacific-drive",
       "name": "Pacific Drive",
-      "image": "",
+      "image": "https://media.rawg.io/media/games/43e/43e69395a05af3b4d44ef3a7d50925b2.jpg",
       "ownedPlatforms": [
         "ps5"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 850702,
+      "released": "2024-02-21",
+      "rating": 3.78,
+      "availablePlatforms": [
+        "PC",
+        "PlayStation 5"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:38.467Z"
     },
     "signalis": {
       "id": "signalis",
-      "name": "SIGNALIS",
-      "image": "",
+      "name": "Signalis",
+      "image": "https://media.rawg.io/media/games/480/480295ba922318bb052d169174ec88aa.jpg",
       "ownedPlatforms": [
         "ps5"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 424978,
+      "released": "2022-10-27",
+      "rating": 4.35,
+      "availablePlatforms": [
+        "PC",
+        "Xbox One",
+        "PlayStation 4",
+        "Xbox Series S/X",
+        "Nintendo Switch"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:38.851Z"
     },
     "plucky-squire": {
       "id": "plucky-squire",
       "name": "The Plucky Squire",
-      "image": "",
+      "image": "https://media.rawg.io/media/games/15b/15b8dfa78091b549baa744597e49edd3.jpg",
       "ownedPlatforms": [
         "ps5"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 804851,
+      "released": "2024-09-17",
+      "rating": 3.84,
+      "availablePlatforms": [
+        "PC",
+        "PlayStation 5",
+        "Nintendo Switch"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:39.603Z"
     },
     "the-alters": {
       "id": "the-alters",
       "name": "The Alters",
-      "image": "",
+      "image": "https://media.rawg.io/media/games/18f/18fba094d4ba0dda019131ea9b585446.jpg",
       "ownedPlatforms": [
         "rog"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 801122,
+      "released": "2025-06-13",
+      "rating": 4.3,
+      "availablePlatforms": [
+        "PC",
+        "PlayStation 5",
+        "Xbox Series S/X"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:40.191Z"
     },
     "titanfall-2": {
       "id": "titanfall-2",
       "name": "Titanfall 2",
-      "image": "",
+      "image": "https://media.rawg.io/media/games/569/56978b5a77f13aa2ec5d09ec81d01cad.jpg",
       "ownedPlatforms": [
         "rog"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 923,
+      "released": "2016-10-28",
+      "rating": 4.31,
+      "availablePlatforms": [
+        "PC",
+        "Xbox One",
+        "PlayStation 4"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:40.688Z"
     },
     "ryse-son-of-rome": {
       "id": "ryse-son-of-rome",
       "name": "Ryse: Son of Rome",
-      "image": "",
+      "image": "https://media.rawg.io/media/games/736/736c0eaec96d848d7824b33298a182f2.jpg",
       "ownedPlatforms": [
         "rog"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 17803,
+      "released": "2013-11-22",
+      "rating": 3.59,
+      "availablePlatforms": [
+        "PC",
+        "Xbox One"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:41.264Z"
     },
     "blasphemous": {
       "id": "blasphemous",
       "name": "Blasphemous",
-      "image": "",
+      "image": "https://media.rawg.io/media/games/b01/b01aa6b2d6d4f683203e9471a8b8d5b5.jpg",
       "ownedPlatforms": [
         "rog"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 258322,
+      "released": "2019-09-09",
+      "rating": 4.05,
+      "availablePlatforms": [
+        "PC",
+        "Xbox One",
+        "PlayStation 4",
+        "Nintendo Switch",
+        "macOS",
+        "Linux"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:41.664Z"
     },
     "en-garde": {
       "id": "en-garde",
       "name": "En Garde!",
-      "image": "",
+      "image": "https://media.rawg.io/media/games/32e/32ec3c0a53bf3ff458211ea45d8a3bdb.jpg",
       "ownedPlatforms": [
         "rog"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 91642,
+      "released": "2023-08-15",
+      "rating": 3.97,
+      "availablePlatforms": [
+        "PC"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:46.314Z"
     },
     "europa": {
       "id": "europa",
       "name": "Europa",
-      "image": "",
+      "image": "https://media.rawg.io/media/games/4fa/4fa39156db1759e255cd58aebf4f2cef.jpg",
       "ownedPlatforms": [
         "rog"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 35198,
+      "released": "2024-10-11",
+      "rating": 2.82,
+      "availablePlatforms": [
+        "PC",
+        "Nintendo Switch"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:46.705Z"
     },
     "industria": {
       "id": "industria",
-      "name": "INDUSTRIA",
-      "image": "",
+      "name": "Industria",
+      "image": "https://media.rawg.io/media/games/b56/b56a60b8dd77653636ff313bcafb251e.jpg",
       "ownedPlatforms": [
         "rog"
       ],
-      "metadataPending": true
+      "metadataPending": false,
+      "rawgId": 447815,
+      "released": "2021-09-30",
+      "rating": 3,
+      "availablePlatforms": [
+        "PC",
+        "PlayStation 5",
+        "Xbox One",
+        "Xbox Series S/X"
+      ],
+      "metadataUpdatedAt": "2026-08-19T16:50:47.082Z"
     }
   },
   "backlog": [
