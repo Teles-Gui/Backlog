@@ -1,0 +1,297 @@
+{
+  "version": 2,
+  "games": {
+    "mafia-old-country": {
+      "id": "mafia-old-country",
+      "name": "Mafia: The Old Country",
+      "image": "",
+      "ownedPlatforms": [
+        "ps5"
+      ],
+      "metadataPending": true
+    },
+    "clair-obscur-expedition-33": {
+      "id": "clair-obscur-expedition-33",
+      "name": "Clair Obscur: Expedition 33",
+      "image": "",
+      "ownedPlatforms": [
+        "rog"
+      ],
+      "metadataPending": true
+    },
+    "hollow-knight": {
+      "id": "hollow-knight",
+      "name": "Hollow Knight",
+      "image": "",
+      "ownedPlatforms": [
+        "rog"
+      ],
+      "metadataPending": true
+    },
+    "forgive-me-father": {
+      "id": "forgive-me-father",
+      "name": "Forgive Me Father",
+      "image": "",
+      "ownedPlatforms": [
+        "rog"
+      ],
+      "metadataPending": true
+    },
+    "assassins-creed-mirage": {
+      "id": "assassins-creed-mirage",
+      "name": "Assassin's Creed Mirage",
+      "image": "",
+      "ownedPlatforms": [
+        "ps5"
+      ],
+      "metadataPending": true
+    },
+    "metal-gear-solid-delta": {
+      "id": "metal-gear-solid-delta",
+      "name": "METAL GEAR SOLID Δ: SNAKE EATER",
+      "image": "",
+      "ownedPlatforms": [
+        "ps5"
+      ],
+      "metadataPending": true
+    },
+    "hell-is-us": {
+      "id": "hell-is-us",
+      "name": "HELL is US",
+      "image": "",
+      "ownedPlatforms": [
+        "ps5"
+      ],
+      "metadataPending": true
+    },
+    "doom-the-dark-ages": {
+      "id": "doom-the-dark-ages",
+      "name": "DOOM: The Dark Ages",
+      "image": "",
+      "ownedPlatforms": [
+        "ps5"
+      ],
+      "metadataPending": true
+    },
+    "indiana-jones-great-circle": {
+      "id": "indiana-jones-great-circle",
+      "name": "Indiana Jones and the Great Circle",
+      "image": "",
+      "ownedPlatforms": [
+        "ps5"
+      ],
+      "metadataPending": true
+    },
+    "control-resonant": {
+      "id": "control-resonant",
+      "name": "CONTROL Resonant",
+      "image": "",
+      "ownedPlatforms": [
+        "ps5"
+      ],
+      "metadataPending": true
+    },
+    "marvels-wolverine": {
+      "id": "marvels-wolverine",
+      "name": "Marvel's Wolverine",
+      "image": "",
+      "ownedPlatforms": [
+        "ps5"
+      ],
+      "metadataPending": true
+    },
+    "saros": {
+      "id": "saros",
+      "name": "SAROS",
+      "image": "",
+      "ownedPlatforms": [
+        "ps5"
+      ],
+      "metadataPending": true
+    },
+    "blood-of-dawnwalker": {
+      "id": "blood-of-dawnwalker",
+      "name": "The Blood of Dawnwalker",
+      "image": "",
+      "ownedPlatforms": [
+        "ps5"
+      ],
+      "metadataPending": true
+    },
+    "resident-evil-4": {
+      "id": "resident-evil-4",
+      "name": "Resident Evil 4",
+      "image": "",
+      "ownedPlatforms": [
+        "ps5"
+      ],
+      "metadataPending": true
+    },
+    "resident-evil-2-remake": {
+      "id": "resident-evil-2-remake",
+      "name": "Resident Evil 2",
+      "image": "",
+      "ownedPlatforms": [
+        "ps5"
+      ],
+      "metadataPending": true
+    },
+    "resident-evil-7": {
+      "id": "resident-evil-7",
+      "name": "Resident Evil 7 biohazard",
+      "image": "",
+      "ownedPlatforms": [
+        "ps5"
+      ],
+      "metadataPending": true
+    },
+    "resident-evil-3": {
+      "id": "resident-evil-3",
+      "name": "Resident Evil 3",
+      "image": "",
+      "ownedPlatforms": [
+        "ps5"
+      ],
+      "metadataPending": true
+    },
+    "plague-tale-requiem": {
+      "id": "plague-tale-requiem",
+      "name": "A Plague Tale: Requiem",
+      "image": "",
+      "ownedPlatforms": [
+        "ps5"
+      ],
+      "metadataPending": true
+    },
+    "pacific-drive": {
+      "id": "pacific-drive",
+      "name": "Pacific Drive",
+      "image": "",
+      "ownedPlatforms": [
+        "ps5"
+      ],
+      "metadataPending": true
+    },
+    "signalis": {
+      "id": "signalis",
+      "name": "SIGNALIS",
+      "image": "",
+      "ownedPlatforms": [
+        "ps5"
+      ],
+      "metadataPending": true
+    },
+    "plucky-squire": {
+      "id": "plucky-squire",
+      "name": "The Plucky Squire",
+      "image": "",
+      "ownedPlatforms": [
+        "ps5"
+      ],
+      "metadataPending": true
+    },
+    "the-alters": {
+      "id": "the-alters",
+      "name": "The Alters",
+      "image": "",
+      "ownedPlatforms": [
+        "rog"
+      ],
+      "metadataPending": true
+    },
+    "titanfall-2": {
+      "id": "titanfall-2",
+      "name": "Titanfall 2",
+      "image": "",
+      "ownedPlatforms": [
+        "rog"
+      ],
+      "metadataPending": true
+    },
+    "ryse-son-of-rome": {
+      "id": "ryse-son-of-rome",
+      "name": "Ryse: Son of Rome",
+      "image": "",
+      "ownedPlatforms": [
+        "rog"
+      ],
+      "metadataPending": true
+    },
+    "blasphemous": {
+      "id": "blasphemous",
+      "name": "Blasphemous",
+      "image": "",
+      "ownedPlatforms": [
+        "rog"
+      ],
+      "metadataPending": true
+    },
+    "en-garde": {
+      "id": "en-garde",
+      "name": "En Garde!",
+      "image": "",
+      "ownedPlatforms": [
+        "rog"
+      ],
+      "metadataPending": true
+    },
+    "europa": {
+      "id": "europa",
+      "name": "Europa",
+      "image": "",
+      "ownedPlatforms": [
+        "rog"
+      ],
+      "metadataPending": true
+    },
+    "industria": {
+      "id": "industria",
+      "name": "INDUSTRIA",
+      "image": "",
+      "ownedPlatforms": [
+        "rog"
+      ],
+      "metadataPending": true
+    }
+  },
+  "backlog": [
+    "assassins-creed-mirage",
+    "metal-gear-solid-delta",
+    "hell-is-us",
+    "doom-the-dark-ages",
+    "indiana-jones-great-circle",
+    "control-resonant",
+    "marvels-wolverine",
+    "saros",
+    "blood-of-dawnwalker",
+    "resident-evil-4",
+    "resident-evil-2-remake",
+    "resident-evil-7",
+    "resident-evil-3",
+    "plague-tale-requiem",
+    "pacific-drive",
+    "signalis",
+    "plucky-squire",
+    "the-alters",
+    "titanfall-2",
+    "ryse-son-of-rome",
+    "blasphemous",
+    "en-garde",
+    "europa",
+    "industria"
+  ],
+  "queues": {
+    "ps5General": [
+      "mafia-old-country"
+    ],
+    "ps5Stella": [],
+    "allyPower": [
+      "clair-obscur-expedition-33"
+    ],
+    "allyPortable": [
+      "hollow-knight",
+      "forgive-me-father"
+    ]
+  },
+  "completed": []
+}
