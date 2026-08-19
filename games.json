@@ -501,6 +501,26 @@
         "Xbox Series S/X"
       ],
       "metadataUpdatedAt": "2026-08-19T16:50:47.082Z"
+    },
+    "rawg-452649": {
+      "id": "rawg-452649",
+      "name": "Resident Evil: Village",
+      "image": "https://media.rawg.io/media/games/6cc/6cc23249972a427f697a3d10eb57a820.jpg",
+      "rawgId": 452649,
+      "released": "2021-05-07",
+      "availablePlatforms": [
+        "PC",
+        "PlayStation 5",
+        "Xbox One",
+        "PlayStation 4",
+        "Xbox Series S/X",
+        "Nintendo Switch",
+        "iOS"
+      ],
+      "ownedPlatforms": [
+        "ps5"
+      ],
+      "addedAt": "2026-08-19T19:06:53.691Z"
     }
   },
   "backlog": [
@@ -526,7 +546,8 @@
     "en-garde",
     "europa",
     "industria",
-    "plague-tale-requiem"
+    "plague-tale-requiem",
+    "rawg-452649"
   ],
   "queues": {
     "ps5General": [],
