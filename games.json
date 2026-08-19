@@ -521,6 +521,22 @@
         "ps5"
       ],
       "addedAt": "2026-08-19T19:06:53.691Z"
+    },
+    "rawg-961198": {
+      "id": "rawg-961198",
+      "name": "Metal Gear Solid Delta: Snake Eater",
+      "image": "https://media.rawg.io/media/games/1c0/1c0548b761f7c4e4c0da71172b3362bf.jpg",
+      "rawgId": 961198,
+      "released": "2025-08-28",
+      "availablePlatforms": [
+        "PC",
+        "PlayStation 5",
+        "Xbox Series S/X"
+      ],
+      "ownedPlatforms": [
+        "ps5"
+      ],
+      "addedAt": "2026-08-19T19:07:14.670Z"
     }
   },
   "backlog": [
@@ -547,7 +563,8 @@
     "europa",
     "industria",
     "plague-tale-requiem",
-    "rawg-452649"
+    "rawg-452649",
+    "rawg-961198"
   ],
   "queues": {
     "ps5General": [],
