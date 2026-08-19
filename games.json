@@ -537,7 +537,6 @@
     "resident-evil-2-remake",
     "resident-evil-7",
     "resident-evil-3",
-    "plague-tale-requiem",
     "pacific-drive",
     "signalis",
     "plucky-squire",
@@ -552,7 +551,8 @@
   "queues": {
     "ps5General": [],
     "ps5Stella": [
-      "mafia-old-country"
+      "mafia-old-country",
+      "plague-tale-requiem"
     ],
     "allyPower": [
       "clair-obscur-expedition-33"
