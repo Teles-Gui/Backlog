@@ -538,7 +538,6 @@
     }
   },
   "backlog": [
-    "assassins-creed-mirage",
     "hell-is-us",
     "doom-the-dark-ages",
     "indiana-jones-great-circle",
@@ -562,7 +561,8 @@
     "plague-tale-requiem",
     "rawg-452649",
     "rawg-961198",
-    "rawg-442855"
+    "rawg-442855",
+    "assassins-creed-mirage"
   ],
   "queues": {
     "ps5General": [],
