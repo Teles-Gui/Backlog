@@ -519,6 +519,22 @@
         "ps5"
       ],
       "addedAt": "2026-08-19T19:07:14.670Z"
+    },
+    "rawg-442855": {
+      "id": "rawg-442855",
+      "name": "Mafia II: Definitive Edition",
+      "image": "https://media.rawg.io/media/games/d73/d7364906c530ccc2d89b0b5d8695e03c.jpg",
+      "rawgId": 442855,
+      "released": "2020-05-19",
+      "availablePlatforms": [
+        "PC",
+        "Xbox One",
+        "PlayStation 4"
+      ],
+      "ownedPlatforms": [
+        "ps5"
+      ],
+      "addedAt": "2026-08-20T12:36:59.959Z"
     }
   },
   "backlog": [
@@ -545,7 +561,8 @@
     "industria",
     "plague-tale-requiem",
     "rawg-452649",
-    "rawg-961198"
+    "rawg-961198",
+    "rawg-442855"
   ],
   "queues": {
     "ps5General": [],
