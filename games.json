@@ -550,6 +550,20 @@
         "rog"
       ],
       "addedAt": "2026-08-24T19:47:23.755Z"
+    },
+    "rawg-28026": {
+      "id": "rawg-28026",
+      "name": "Super Mario Odyssey",
+      "image": "https://media.rawg.io/media/games/267/267bd0dbc496f52692487d07d014c061.jpg",
+      "rawgId": 28026,
+      "released": "2017-10-27",
+      "availablePlatforms": [
+        "Nintendo Switch"
+      ],
+      "ownedPlatforms": [
+        "rog"
+      ],
+      "addedAt": "2026-08-24T19:47:33.580Z"
     }
   },
   "backlog": [
@@ -578,7 +592,8 @@
     "rawg-961198",
     "rawg-442855",
     "assassins-creed-mirage",
-    "rawg-22511"
+    "rawg-22511",
+    "rawg-28026"
   ],
   "queues": {
     "ps5General": [],
