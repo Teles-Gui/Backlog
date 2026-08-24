@@ -535,6 +535,21 @@
         "ps5"
       ],
       "addedAt": "2026-08-20T12:36:59.959Z"
+    },
+    "rawg-22511": {
+      "id": "rawg-22511",
+      "name": "The Legend of Zelda: Breath of the Wild",
+      "image": "https://media.rawg.io/media/games/cc1/cc196a5ad763955d6532cdba236f730c.jpg",
+      "rawgId": 22511,
+      "released": "2017-03-03",
+      "availablePlatforms": [
+        "Nintendo Switch",
+        "Wii U"
+      ],
+      "ownedPlatforms": [
+        "rog"
+      ],
+      "addedAt": "2026-08-24T19:47:23.755Z"
     }
   },
   "backlog": [
@@ -562,7 +577,8 @@
     "rawg-452649",
     "rawg-961198",
     "rawg-442855",
-    "assassins-creed-mirage"
+    "assassins-creed-mirage",
+    "rawg-22511"
   ],
   "queues": {
     "ps5General": [],
