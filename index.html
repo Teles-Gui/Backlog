@@ -58,9 +58,9 @@
     .backlog-head{padding:4px 16px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px}
     .backlog-title{font-family:Oxanium,sans-serif;font-weight:700;letter-spacing:.05em;color:#c084fc;font-size:20px;display:flex;align-items:center;gap:9px}
     .count-pill{font-size:11px;color:#c5b5df;border:1px solid rgba(168,85,247,.32);background:rgba(168,85,247,.08);padding:4px 8px;border-radius:999px}
-    .infinity-mark{font-family:Oxanium,sans-serif;color:#b365ff;font-size:24px;line-height:1}
-    .backlog-scroll{overflow-y:auto;scrollbar-width:none;padding:0 12px;position:relative;mask-image:linear-gradient(transparent 0,#000 6%,#000 94%,transparent 100%)}
-    .backlog-scroll::-webkit-scrollbar{display:none}
+    .infinity-mark{font-family:Oxanium,sans-serif;color:#b365ff;font-size:13px;font-weight:800;letter-spacing:.08em;line-height:1}
+    .backlog-scroll{overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(168,85,247,.38) transparent;padding:0 12px;position:relative}
+    .backlog-scroll::-webkit-scrollbar{width:5px}.backlog-scroll::-webkit-scrollbar-thumb{background:rgba(168,85,247,.38);border-radius:999px}.backlog-scroll::-webkit-scrollbar-track{background:transparent}
     .backlog-list{display:flex;flex-direction:column;gap:8px;padding:18px 0}
     .backlog-empty{min-height:100%;display:flex;align-items:center;justify-content:center;padding:26px 18px;text-align:center;color:#6f7e9e;font-size:13px;line-height:1.5}
     .backlog-foot{height:36px;display:flex;align-items:center;justify-content:center;border-top:1px solid rgba(255,255,255,.03)}
@@ -393,13 +393,13 @@
 <body>
 <div class="app">
   <aside class="backlog-shell" id="backlogDrop" data-drop="backlog">
-    <div class="loop-label">rolagem infinita · ↑</div>
+    <div class="loop-label">lista alfabética · A–Z</div>
     <div class="backlog-head">
       <div class="backlog-title">▣ BACKLOG</div>
-      <div style="display:flex;align-items:center;gap:8px"><span class="count-pill" id="backlogCount">0</span><span class="infinity-mark">∞</span><button class="mobile-backlog-close" id="mobileBacklogClose" aria-label="Fechar Backlog">×</button></div>
+      <div style="display:flex;align-items:center;gap:8px"><span class="count-pill" id="backlogCount">0</span><span class="infinity-mark">A→Z</span><button class="mobile-backlog-close" id="mobileBacklogClose" aria-label="Fechar Backlog">×</button></div>
     </div>
     <div class="backlog-scroll" id="backlogScroll"><div class="backlog-list" id="backlogList"></div></div>
-    <div class="backlog-foot"><div class="loop-label" style="padding:0">↓ · rolagem infinita</div></div>
+    <div class="backlog-foot"><div class="loop-label" style="padding:0">A–Z · fim da lista</div></div>
   </aside>
 
   <main class="main">
@@ -416,7 +416,7 @@
       <button class="toolbar-btn mobile-backlog-btn" id="mobileBacklogBtn">▣ Backlog <span class="mobile-count" id="mobileBacklogCount">0</span></button>
       <button class="toolbar-btn" id="apiKeyBtn"><span class="key-dot" id="keyDot"></span> ⚙ Configurações</button>
       <button class="toolbar-btn" id="syncNowBtn">↻ Sincronizar</button>
-      <div class="sync-status local" id="syncStatus" title="Status da sincronização"><span class="sync-dot"></span><span id="syncStatusText">GitHub não conectado</span></div>
+      <div class="sync-status local" id="syncStatus" title="Status da sincronização"><span class="sync-dot"></span><span id="syncStatusText">Conectando…</span></div>
       <button class="toolbar-btn" id="exportBtn">⇩ Exportar</button>
       <button class="toolbar-btn" id="importBtn">⇧ Importar</button>
       <input type="file" id="importFile" accept="application/json" hidden>
@@ -469,11 +469,10 @@
         <div class="sync-actions"><button class="secondary-btn" id="testRawgBtn">Testar RAWG</button><button class="primary-btn" id="enrichLibraryBtn">✦ Enriquecer biblioteca</button></div>
       </div>
       <div class="settings-section">
-        <div class="settings-title"><span class="mini-dot" id="githubSettingsDot"></span> Sincronização · GitHub</div>
-        <input class="key-input" id="githubTokenInput" type="password" autocomplete="off" placeholder="Fine-grained GitHub token" />
+        <div class="settings-title"><span class="mini-dot" id="githubSettingsDot"></span> Sincronização · GitHub via Cloudflare</div>
         <div class="repo-chip"><strong>Repositório:</strong> Teles-Gui/Backlog · <strong>Branch:</strong> main · <strong>Arquivo:</strong> games.json</div>
-        <div class="help">O token precisa ter acesso somente ao repositório <strong>Backlog</strong> e permissão <strong>Contents: Read and write</strong>. Ele fica apenas neste navegador. Cadastre uma vez em cada aparelho que poderá editar.</div>
-        <div class="sync-actions"><button class="secondary-btn" id="clearGithubBtn">Desconectar GitHub</button><button class="secondary-btn" id="testGithubBtn">Testar conexão</button></div>
+        <div class="help">O token do GitHub fica protegido como <strong>Secret</strong> no mesmo Cloudflare Worker. Nenhum PC ou celular precisa armazenar o token para ler, mover, adicionar ou salvar jogos.</div>
+        <div class="sync-actions"><button class="secondary-btn" id="testGithubBtn">Testar GitHub</button></div>
       </div>
       <div class="modal-actions"><button class="secondary-btn" data-close="keyModal">Cancelar</button><button class="primary-btn" id="saveKeyBtn">Salvar configurações</button></div>
     </div>
@@ -545,14 +544,10 @@
 (() => {
   const STORAGE_KEY = 'cyberGameBacklog.v3';
   const DIRTY_KEY = 'cyberGameBacklog.v3.dirty';
-  const GITHUB_TOKEN_STORAGE = 'cyberGameBacklog.githubToken';
   // Remove a chave RAWG legada: a versão atual usa o Cloudflare Worker.
   localStorage.removeItem('cyberGameBacklog.rawgKey');
-  const GITHUB_OWNER = 'Teles-Gui';
-  const GITHUB_REPO = 'Backlog';
-  const GITHUB_BRANCH = 'main';
-  const GITHUB_FILE = 'games.json';
-  const GITHUB_CONTENTS_URL = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FILE}`;
+  // Remove token GitHub legado do navegador: a sincronização agora passa pelo Worker.
+  localStorage.removeItem('cyberGameBacklog.githubToken');
   const REMOTE_DATA_URL = './games.json';
 
   const platformCatalog = [
@@ -613,61 +608,95 @@
     return out;
   }
 
-  function githubToken(){ return localStorage.getItem(GITHUB_TOKEN_STORAGE) || ''; }
+  function applyBacklogAdditionsMigration(){
+    state.appConfig = state.appConfig || {};
+    const migrationKey = 'backlogAdditions_2026_08_26_v1';
+    if(state.appConfig[migrationKey]) return false;
 
-  function githubHeaders(includeJson=false){
-    const h = { 'Accept':'application/vnd.github+json', 'X-GitHub-Api-Version':'2022-11-28' };
-    const token = githubToken();
-    if(token) h['Authorization'] = `Bearer ${token}`;
-    if(includeJson) h['Content-Type']='application/json';
-    return h;
+    const additions = [
+      { id:'cronos-the-new-dawn', name:'Cronos: The New Dawn', ownedPlatforms:['ps5'] },
+      { id:'the-legend-of-zelda-breath-of-the-wild', name:'The Legend of Zelda: Breath of the Wild', ownedPlatforms:['rog'] },
+      { id:'super-mario-odyssey', name:'Super Mario Odyssey', ownedPlatforms:['rog'] }
+    ];
+
+    let changed = false;
+    for(const item of additions){
+      const existing = Object.values(state.games).find(g => normalizeGameTitle(g?.name) === normalizeGameTitle(item.name));
+      if(existing){
+        existing.ownedPlatforms = uniq([...(existing.ownedPlatforms||[]), ...item.ownedPlatforms]);
+        const existingId = String(existing.id);
+        const alreadyLocated = state.backlog.includes(existingId) || state.completed.includes(existingId) || Object.values(state.queues).some(q=>q.includes(existingId));
+        if(!alreadyLocated) state.backlog.push(existingId);
+        continue;
+      }
+      state.games[item.id] = {
+        id:item.id,
+        name:item.name,
+        ownedPlatforms:[...item.ownedPlatforms],
+        metadataPending:true,
+        addedAt:new Date().toISOString()
+      };
+      state.backlog.push(item.id);
+      changed = true;
+    }
+
+    state.appConfig[migrationKey] = true;
+    return true || changed;
   }
 
-  function base64ToUtf8(b64){
-    const binary=atob(String(b64||'').replace(/\n/g,''));
-    const bytes=Uint8Array.from(binary,c=>c.charCodeAt(0));
-    return new TextDecoder().decode(bytes);
-  }
-
-  function utf8ToBase64(str){
-    const bytes=new TextEncoder().encode(str);
-    let binary='';
-    const chunk=0x8000;
-    for(let i=0;i<bytes.length;i+=chunk) binary += String.fromCharCode(...bytes.subarray(i,i+chunk));
-    return btoa(binary);
+  async function fetchWorkerStateFrom(proxy){
+    const base=String(proxy||'').trim().replace(/\/+$/,'');
+    if(!base) throw new Error('Worker não configurado');
+    const res=await fetch(`${base}/state?_=${Date.now()}`,{headers:{'Accept':'application/json'},cache:'no-store'});
+    const data=await res.json().catch(()=>({}));
+    if(!res.ok){ const err=new Error(data.error||`Worker ${res.status}`); err.status=res.status; throw err; }
+    return { sha:data.sha||null, state:normalizeState(data.state) };
   }
 
   async function fetchGithubFile(){
-    const url=`${GITHUB_CONTENTS_URL}?ref=${encodeURIComponent(GITHUB_BRANCH)}&_=${Date.now()}`;
-    const res=await fetch(url,{headers:githubHeaders(),cache:'no-store'});
-    if(!res.ok){
-      const detail=await res.json().catch(()=>({}));
-      const err=new Error(detail.message||`GitHub ${res.status}`); err.status=res.status; throw err;
-    }
-    const data=await res.json();
-    return { sha:data.sha, state:normalizeState(JSON.parse(base64ToUtf8(data.content))) };
+    return fetchWorkerStateFrom(rawgProxyUrl());
   }
 
   async function loadState(){
-    setSyncStatus('saving','Carregando GitHub…');
+    setSyncStatus('saving','Carregando…');
+
+    let bootstrap=null;
     try{
-      const remote=await fetchGithubFile();
-      remoteSha=remote.sha; state=remote.state;
-      localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
-      localStorage.removeItem(DIRTY_KEY);
-      renderAll();
-      setSyncStatus(githubToken()?'synced':'local',githubToken()?'✓ Sincronizado':'Somente leitura');
-      return;
-    }catch(err){
-      console.warn('Falha ao carregar GitHub; usando cache local.',err);
+      const res=await fetch(`${REMOTE_DATA_URL}?_=${Date.now()}`,{cache:'no-store'});
+      if(res.ok) bootstrap=normalizeState(await res.json());
+    }catch(e){}
+
+    if(!bootstrap){
+      const local=localStorage.getItem(STORAGE_KEY);
+      if(local){ try{ bootstrap=normalizeState(JSON.parse(local)); }catch(e){} }
     }
-    const local=localStorage.getItem(STORAGE_KEY);
-    if(local){ try{ state=normalizeState(JSON.parse(local)); }catch(e){} }
-    else {
-      try{ const res=await fetch(`${REMOTE_DATA_URL}?_=${Date.now()}`,{cache:'no-store'}); if(res.ok) state=normalizeState(await res.json()); }catch(e){}
+    if(bootstrap) state=bootstrap;
+
+    if(rawgProxyUrl()){
+      try{
+        const remote=await fetchGithubFile();
+        remoteSha=remote.sha; state=remote.state;
+        const migrated = applyBacklogAdditionsMigration();
+        localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
+        if(migrated){
+          localStorage.setItem(DIRTY_KEY,'1');
+          renderAll();
+          scheduleGithubSync();
+        }else{
+          localStorage.removeItem(DIRTY_KEY);
+          renderAll();
+          setSyncStatus('synced','✓ Sincronizado');
+        }
+        return;
+      }catch(err){
+        console.warn('Falha ao carregar GitHub via Cloudflare; usando cache/bootstrap.',err);
+      }
     }
+
+    const migrated = applyBacklogAdditionsMigration();
+    if(migrated) localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
     renderAll();
-    setSyncStatus('error','Offline · dados locais');
+    setSyncStatus(rawgProxyUrl()?'error':'local',rawgProxyUrl()?'⚠ Offline · dados locais':'Worker não configurado');
   }
 
   function saveState(show=false){
@@ -679,7 +708,7 @@
 
   function scheduleGithubSync(){
     clearTimeout(syncTimer);
-    if(!githubToken()){ setSyncStatus('local','GitHub não conectado'); return; }
+    if(!rawgProxyUrl()){ setSyncStatus('local','Worker não configurado'); return; }
     setSyncStatus('saving','Salvando…');
     syncTimer=setTimeout(()=>syncToGithub(false),1200);
   }
@@ -692,34 +721,31 @@
 
   async function syncToGithub(force=false){
     if(syncing){ pendingSync=true; return; }
-    const token=githubToken();
-    if(!token){ setSyncStatus('local','GitHub não conectado'); openSettingsGithub(); return; }
+    const proxy=rawgProxyUrl();
+    if(!proxy){ setSyncStatus('local','Worker não configurado'); openSettingsGithub(); return; }
     syncing=true; pendingSync=false; setSyncStatus('saving','Salvando…');
     try{
-      const latest=await fetchGithubFile();
-      if(remoteSha && latest.sha!==remoteSha && !force){
+      const res=await fetch(`${proxy}/state`,{
+        method:'PUT',
+        headers:{'Accept':'application/json','Content-Type':'application/json'},
+        body:JSON.stringify({ state, baseSha:remoteSha||'', force:force===true })
+      });
+      const data=await res.json().catch(()=>({}));
+      if(res.status===409 || data.conflict){
         remoteConflict=true;
+        if(data.latestSha) remoteSha=data.latestSha;
         setSyncStatus('error','Conflito entre aparelhos');
         toast('O GitHub mudou em outro aparelho. Clique em Sincronizar para escolher como continuar.');
         return;
       }
-      const content=utf8ToBase64(JSON.stringify(state,null,2)+'\n');
-      const res=await fetch(GITHUB_CONTENTS_URL,{
-        method:'PUT', headers:githubHeaders(true),
-        body:JSON.stringify({
-          message:`Atualiza backlog · ${new Date().toLocaleString('pt-BR')}`,
-          content, sha:latest.sha, branch:GITHUB_BRANCH
-        })
-      });
-      if(!res.ok){ const detail=await res.json().catch(()=>({})); throw new Error(detail.message||`GitHub ${res.status}`); }
-      const data=await res.json();
-      remoteSha=data.content?.sha || data.commit?.sha || null;
+      if(!res.ok) throw new Error(data.error||`Worker ${res.status}`);
+      remoteSha=data.sha||remoteSha;
       remoteConflict=false; localStorage.removeItem(DIRTY_KEY);
       setSyncStatus('synced','✓ Sincronizado');
     }catch(err){
-      console.error('Erro de sincronização GitHub',err);
+      console.error('Erro de sincronização via Cloudflare',err);
       setSyncStatus('error','⚠ Erro ao sincronizar');
-      toast(err.message?.includes('Bad credentials')?'Token do GitHub inválido ou expirado.':'Não foi possível sincronizar com o GitHub.');
+      toast('Não foi possível sincronizar com o GitHub via Cloudflare.');
     }finally{
       syncing=false;
       if(pendingSync){ pendingSync=false; scheduleGithubSync(); }
@@ -727,28 +753,26 @@
   }
 
   async function manualSync(){
-    if(!githubToken()){ openSettingsGithub(); return; }
+    if(!rawgProxyUrl()){ openSettingsGithub(); return; }
     if(remoteConflict){
       const overwrite=confirm('O arquivo mudou em outro dispositivo.\n\nOK = manter ESTE aparelho e sobrescrever o GitHub.\nCancelar = baixar a versão mais recente do GitHub.');
       if(overwrite){ await syncToGithub(true); }
       else {
         try{ const remote=await fetchGithubFile(); state=remote.state; remoteSha=remote.sha; remoteConflict=false; localStorage.setItem(STORAGE_KEY,JSON.stringify(state)); localStorage.removeItem(DIRTY_KEY); renderAll(); setSyncStatus('synced','✓ Sincronizado'); toast('Versão mais recente do GitHub carregada.'); }
-        catch(e){ setSyncStatus('error','⚠ Erro ao sincronizar'); toast('Não consegui carregar o GitHub.'); }
+        catch(e){ setSyncStatus('error','⚠ Erro ao sincronizar'); toast('Não consegui carregar o GitHub via Cloudflare.'); }
       }
       return;
     }
     if(localStorage.getItem(DIRTY_KEY)==='1') await syncToGithub(false);
     else {
       try{ const remote=await fetchGithubFile(); state=remote.state; remoteSha=remote.sha; localStorage.setItem(STORAGE_KEY,JSON.stringify(state)); renderAll(); setSyncStatus('synced','✓ Sincronizado'); toast('Tudo está atualizado.'); }
-      catch(e){ setSyncStatus('error','⚠ Erro ao sincronizar'); toast('Não consegui consultar o GitHub.'); }
+      catch(e){ setSyncStatus('error','⚠ Erro ao sincronizar'); toast('Não consegui consultar o GitHub via Cloudflare.'); }
     }
   }
 
   function openSettingsGithub(){
     el('rawgProxyInput').value=rawgProxyUrl();
-    el('githubTokenInput').value=githubToken();
     updateKeyIndicator(); openModal('keyModal');
-    setTimeout(()=>el('githubTokenInput').focus(),80);
   }
 
   function iconSVG(type){
@@ -771,18 +795,13 @@
 
   function renderBacklog(){
     const list = el('backlogList');
-    const ids = state.backlog.filter(id=>state.games[id]);
+    const ids = state.backlog
+      .filter(id=>state.games[id])
+      .sort((a,b)=>String(state.games[a]?.name||'').localeCompare(String(state.games[b]?.name||''),'pt-BR',{sensitivity:'base',numeric:true}));
     el('backlogCount').textContent = ids.length;
     if(el('mobileBacklogCount')) el('mobileBacklogCount').textContent = ids.length;
     if(!ids.length){ list.innerHTML = '<div class="backlog-empty">Seu Backlog está vazio.<br>Use a barra “+” para adicionar jogos ou arraste um jogo de volta para cá.</div>'; return; }
-    const cards = ids.map(id => backlogCard(state.games[id])).join('');
-    // Three copies make the manual vertical scroll loop seamlessly.
-    list.innerHTML = cards + cards + cards;
-    requestAnimationFrame(()=>{
-      const sc = el('backlogScroll');
-      const segment = list.scrollHeight / 3;
-      if(segment>0 && (sc.scrollTop < 2 || sc.scrollTop > segment*2)) sc.scrollTop = segment;
-    });
+    list.innerHTML = ids.map(id => backlogCard(state.games[id])).join('');
   }
 
   function backlogCard(game){
@@ -832,16 +851,7 @@
     bindDragItems();
   }
 
-  // Infinite backlog scroll looping
-  el('backlogScroll').addEventListener('scroll',()=>{
-    const sc = el('backlogScroll');
-    const list = el('backlogList');
-    if(state.backlog.length===0) return;
-    const segment = list.scrollHeight/3;
-    if(!segment) return;
-    if(sc.scrollTop < segment*.35) sc.scrollTop += segment;
-    else if(sc.scrollTop > segment*1.65) sc.scrollTop -= segment;
-  });
+  // Backlog comum: uma única lista vertical em ordem alfabética.
 
   function bindDragItems(){
     document.querySelectorAll('[draggable="true"][data-game-id]').forEach(node=>{
@@ -881,7 +891,10 @@
   const enrichmentHints = {
     'resident-evil-4': { year:2023 },
     'resident-evil-2-remake': { year:2019 },
-    'resident-evil-3': { year:2020 }
+    'resident-evil-3': { year:2020 },
+    'cronos-the-new-dawn': { year:2025 },
+    'the-legend-of-zelda-breath-of-the-wild': { year:2017 },
+    'super-mario-odyssey': { year:2017 }
   };
 
   function normalizeGameTitle(value){
@@ -1090,23 +1103,24 @@
   // Settings: RAWG via Cloudflare + GitHub
   el('apiKeyBtn').addEventListener('click',()=>{
     el('rawgProxyInput').value=rawgProxyUrl();
-    el('githubTokenInput').value=githubToken();
     updateKeyIndicator();
     openModal('keyModal');
   });
   el('saveKeyBtn').addEventListener('click',async()=>{
     const rawgProxy=el('rawgProxyInput').value.trim().replace(/\/+$/,'');
-    const gh=el('githubTokenInput').value.trim();
     const proxyChanged=rawgProxy!==rawgProxyUrl();
     state.appConfig=state.appConfig||{};
     state.appConfig.rawgProxyUrl=rawgProxy;
-    if(gh)localStorage.setItem(GITHUB_TOKEN_STORAGE,gh);else localStorage.removeItem(GITHUB_TOKEN_STORAGE);
     localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
     if(proxyChanged)localStorage.setItem(DIRTY_KEY,'1');
     updateKeyIndicator();closeModal('keyModal');
-    if(gh && proxyChanged){toast('Configuração global salva. Sincronizando…');await syncToGithub(false);}
-    else if(gh){toast('Configurações salvas.');}
-    else {setSyncStatus('local','GitHub não conectado');toast('Configuração RAWG salva apenas neste aparelho até conectar o GitHub.');}
+    if(rawgProxy){
+      toast(proxyChanged?'Configuração salva. Sincronizando…':'Configurações salvas.');
+      if(proxyChanged){ remoteSha=null; await syncToGithub(true); }
+    }else{
+      setSyncStatus('local','Worker não configurado');
+      toast('Informe o endereço do Cloudflare Worker.');
+    }
   });
   el('testRawgBtn').addEventListener('click',async()=>{
     const candidate=el('rawgProxyInput').value.trim().replace(/\/+$/,'');
@@ -1136,20 +1150,20 @@
     else closeModal('enrichModal');
   });
   el('enrichDoneBtn').addEventListener('click',()=>closeModal('enrichModal'));
-  el('clearGithubBtn').addEventListener('click',()=>{localStorage.removeItem(GITHUB_TOKEN_STORAGE);el('githubTokenInput').value='';updateKeyIndicator();setSyncStatus('local','GitHub não conectado');toast('GitHub desconectado deste navegador.');});
   el('testGithubBtn').addEventListener('click',async()=>{
-    const candidate=el('githubTokenInput').value.trim();
-    if(!candidate){toast('Cole o token do GitHub primeiro.');return;}
-    const old=githubToken(); localStorage.setItem(GITHUB_TOKEN_STORAGE,candidate);
-    try{const remote=await fetchGithubFile();remoteSha=remote.sha;toast('Conexão com GitHub funcionando.');}
-    catch(e){toast('Não consegui acessar o GitHub com esse token.');if(old)localStorage.setItem(GITHUB_TOKEN_STORAGE,old);else localStorage.removeItem(GITHUB_TOKEN_STORAGE);}
-    updateKeyIndicator();
+    const candidate=el('rawgProxyInput').value.trim().replace(/\/+$/,'') || rawgProxyUrl();
+    if(!candidate){toast('Cole o endereço do Worker primeiro.');return;}
+    try{
+      const remote=await fetchWorkerStateFrom(candidate);
+      if(remote.sha) toast('GitHub via Cloudflare funcionando.');
+      else throw new Error('SHA ausente');
+    }catch(e){toast('Não consegui acessar o GitHub pelo Worker.');}
   });
   function updateKeyIndicator(){
-    const rawg=!!rawgProxyUrl(), gh=!!githubToken();
-    el('keyDot').classList.toggle('ok',rawg && gh);
-    el('rawgSettingsDot')?.classList.toggle('ok',rawg);
-    el('githubSettingsDot')?.classList.toggle('ok',gh);
+    const worker=!!rawgProxyUrl();
+    el('keyDot').classList.toggle('ok',worker);
+    el('rawgSettingsDot')?.classList.toggle('ok',worker);
+    el('githubSettingsDot')?.classList.toggle('ok',worker);
   }
   el('syncNowBtn').addEventListener('click',manualSync);
 
