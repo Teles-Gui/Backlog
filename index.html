@@ -464,17 +464,17 @@
     <div class="modal-body">
       <div class="settings-section">
         <div class="settings-title"><span class="mini-dot" id="rawgSettingsDot"></span> Metadata · RAWG via Cloudflare</div>
-        <input class="key-input" id="rawgProxyInput" type="url" autocomplete="off" placeholder="https://seu-worker.workers.dev" />
-        <div class="help">A chave RAWG fica protegida no Cloudflare Worker. Este endereço é público e pode ser salvo no GitHub para funcionar automaticamente em qualquer aparelho. Dados de jogos fornecidos por <a href="https://rawg.io" target="_blank" rel="noopener">RAWG</a>.</div>
+        <input class="key-input" id="rawgProxyInput" type="url" autocomplete="off" value="https://backlog-rawg-proxy.guilherme-teles.workers.dev" readonly />
+        <div class="help">A chave RAWG fica protegida no Cloudflare Worker. O endereço do Worker já está fixado nesta versão e funciona em qualquer aparelho. Dados de jogos fornecidos por <a href="https://rawg.io" target="_blank" rel="noopener">RAWG</a>.</div>
         <div class="sync-actions"><button class="secondary-btn" id="testRawgBtn">Testar RAWG</button><button class="primary-btn" id="enrichLibraryBtn">✦ Enriquecer biblioteca</button></div>
       </div>
       <div class="settings-section">
         <div class="settings-title"><span class="mini-dot" id="githubSettingsDot"></span> Sincronização · GitHub via Cloudflare</div>
         <div class="repo-chip"><strong>Repositório:</strong> Teles-Gui/Backlog · <strong>Branch:</strong> main · <strong>Arquivo:</strong> games.json</div>
-        <div class="help">O token do GitHub fica protegido como <strong>Secret</strong> no mesmo Cloudflare Worker. Nenhum PC ou celular precisa armazenar o token para ler, mover, adicionar ou salvar jogos.</div>
+        <div class="help">O token do GitHub fica protegido como <strong>Secret</strong> no mesmo Cloudflare Worker. O site acessa diretamente este Worker fixo; nenhum PC ou celular precisa armazenar token ou configurar endereço.</div>
         <div class="sync-actions"><button class="secondary-btn" id="testGithubBtn">Testar GitHub</button></div>
       </div>
-      <div class="modal-actions"><button class="secondary-btn" data-close="keyModal">Cancelar</button><button class="primary-btn" id="saveKeyBtn">Salvar configurações</button></div>
+      <div class="modal-actions"><button class="primary-btn" id="saveKeyBtn">Fechar</button></div>
     </div>
   </div>
 </div>
@@ -549,6 +549,7 @@
   // Remove token GitHub legado do navegador: a sincronização agora passa pelo Worker.
   localStorage.removeItem('cyberGameBacklog.githubToken');
   const REMOTE_DATA_URL = './games.json';
+  const WORKER_URL = 'https://backlog-rawg-proxy.guilherme-teles.workers.dev';
 
   const platformCatalog = [
     { id:'ps5', label:'PS5', icon:'controller' },
@@ -928,7 +929,7 @@
   }
 
   function rawgProxyUrl(){
-    return String(state.appConfig?.rawgProxyUrl || '').trim().replace(/\/+$/,'');
+    return WORKER_URL;
   }
 
   async function rawgFetchGames(query){
@@ -1106,34 +1107,18 @@
     updateKeyIndicator();
     openModal('keyModal');
   });
-  el('saveKeyBtn').addEventListener('click',async()=>{
-    const rawgProxy=el('rawgProxyInput').value.trim().replace(/\/+$/,'');
-    const proxyChanged=rawgProxy!==rawgProxyUrl();
-    state.appConfig=state.appConfig||{};
-    state.appConfig.rawgProxyUrl=rawgProxy;
-    localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
-    if(proxyChanged)localStorage.setItem(DIRTY_KEY,'1');
-    updateKeyIndicator();closeModal('keyModal');
-    if(rawgProxy){
-      toast(proxyChanged?'Configuração salva. Sincronizando…':'Configurações salvas.');
-      if(proxyChanged){ remoteSha=null; await syncToGithub(true); }
-    }else{
-      setSyncStatus('local','Worker não configurado');
-      toast('Informe o endereço do Cloudflare Worker.');
-    }
+  el('saveKeyBtn').addEventListener('click',()=>{
+    closeModal('keyModal');
+    toast('Configurações centralizadas no Cloudflare.');
   });
   el('testRawgBtn').addEventListener('click',async()=>{
-    const candidate=el('rawgProxyInput').value.trim().replace(/\/+$/,'');
-    if(!candidate){toast('Cole o endereço do Worker primeiro.');return;}
-    const previous=state.appConfig?.rawgProxyUrl||'';
-    state.appConfig=state.appConfig||{}; state.appConfig.rawgProxyUrl=candidate;
     try{
-      const res=await fetch(`${candidate}/health`,{headers:{'Accept':'application/json'}});
-      if(!res.ok)throw new Error(`Worker ${res.status}`);
+      const res=await fetch(`${WORKER_URL}/health`,{headers:{'Accept':'application/json'}});
+      const health=await res.json().catch(()=>({}));
+      if(!res.ok || !health.rawgConfigured) throw new Error(`Worker ${res.status}`);
       await rawgFetchGames('Hollow Knight');
       toast('RAWG via Cloudflare funcionando.');
     }catch(e){toast('Não consegui acessar o Worker RAWG.');}
-    finally{state.appConfig.rawgProxyUrl=previous;updateKeyIndicator();}
   });
   el('enrichLibraryBtn').addEventListener('click',startLibraryEnrichment);
   el('enrichCandidates').addEventListener('click',e=>{
@@ -1151,10 +1136,8 @@
   });
   el('enrichDoneBtn').addEventListener('click',()=>closeModal('enrichModal'));
   el('testGithubBtn').addEventListener('click',async()=>{
-    const candidate=el('rawgProxyInput').value.trim().replace(/\/+$/,'') || rawgProxyUrl();
-    if(!candidate){toast('Cole o endereço do Worker primeiro.');return;}
     try{
-      const remote=await fetchWorkerStateFrom(candidate);
+      const remote=await fetchWorkerStateFrom(WORKER_URL);
       if(remote.sha) toast('GitHub via Cloudflare funcionando.');
       else throw new Error('SHA ausente');
     }catch(e){toast('Não consegui acessar o GitHub pelo Worker.');}
