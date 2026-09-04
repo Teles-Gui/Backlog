@@ -583,6 +583,22 @@
         "ps5"
       ],
       "addedAt": "2026-08-27T00:13:15.431Z"
+    },
+    "rawg-989330": {
+      "id": "rawg-989330",
+      "name": "A Quiet Place: The Road Ahead",
+      "image": "https://media.rawg.io/media/games/fff/fff66fcc5922c2d6db60b5fbb7a466da.jpg",
+      "rawgId": 989330,
+      "released": "2024-10-17",
+      "availablePlatforms": [
+        "PC",
+        "PlayStation 5",
+        "Xbox Series S/X"
+      ],
+      "ownedPlatforms": [
+        "ps5"
+      ],
+      "addedAt": "2026-09-04T23:30:45.954Z"
     }
   },
   "backlog": [
@@ -612,7 +628,8 @@
     "assassins-creed-mirage",
     "rawg-22511",
     "rawg-28026",
-    "rawg-990567"
+    "rawg-990567",
+    "rawg-989330"
   ],
   "queues": {
     "ps5General": [],
