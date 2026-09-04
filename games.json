@@ -21,7 +21,8 @@
         "PlayStation 5",
         "Xbox Series S/X"
       ],
-      "metadataUpdatedAt": "2026-08-19T16:50:27.385Z"
+      "metadataUpdatedAt": "2026-08-19T16:50:27.385Z",
+      "completedAt": "2026-09-04T23:19:02.444Z"
     },
     "clair-obscur-expedition-33": {
       "id": "clair-obscur-expedition-33",
@@ -616,9 +617,7 @@
   ],
   "queues": {
     "ps5General": [],
-    "ps5Stella": [
-      "mafia-old-country"
-    ],
+    "ps5Stella": [],
     "allyPower": [
       "clair-obscur-expedition-33"
     ],
@@ -627,5 +626,7 @@
       "forgive-me-father"
     ]
   },
-  "completed": []
+  "completed": [
+    "mafia-old-country"
+  ]
 }
