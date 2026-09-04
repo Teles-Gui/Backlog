@@ -607,7 +607,6 @@
     "europa",
     "industria",
     "plague-tale-requiem",
-    "rawg-452649",
     "rawg-961198",
     "rawg-442855",
     "assassins-creed-mirage",
@@ -617,7 +616,9 @@
   ],
   "queues": {
     "ps5General": [],
-    "ps5Stella": [],
+    "ps5Stella": [
+      "rawg-452649"
+    ],
     "allyPower": [
       "clair-obscur-expedition-33"
     ],
