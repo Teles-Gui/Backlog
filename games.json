@@ -599,6 +599,24 @@
         "ps5"
       ],
       "addedAt": "2026-09-04T23:30:45.954Z"
+    },
+    "rawg-442839": {
+      "id": "rawg-442839",
+      "name": "Observer: System Redux",
+      "image": "https://media.rawg.io/media/games/9ac/9acdbcf11b7aa2c9d629ee38f8fa8c71.jpg",
+      "rawgId": 442839,
+      "released": "2020-11-10",
+      "availablePlatforms": [
+        "PC",
+        "PlayStation 5",
+        "Xbox One",
+        "PlayStation 4",
+        "Xbox Series S/X"
+      ],
+      "ownedPlatforms": [
+        "ps5"
+      ],
+      "addedAt": "2026-09-04T23:36:21.103Z"
     }
   },
   "backlog": [
@@ -629,7 +647,8 @@
     "rawg-22511",
     "rawg-28026",
     "rawg-990567",
-    "rawg-989330"
+    "rawg-989330",
+    "rawg-442839"
   ],
   "queues": {
     "ps5General": [],
