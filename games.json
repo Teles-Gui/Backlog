@@ -639,7 +639,6 @@
     "doom-the-dark-ages",
     "indiana-jones-great-circle",
     "control-resonant",
-    "marvels-wolverine",
     "saros",
     "blood-of-dawnwalker",
     "resident-evil-4",
@@ -668,7 +667,8 @@
   ],
   "queues": {
     "ps5General": [
-      "hell-is-us"
+      "hell-is-us",
+      "marvels-wolverine"
     ],
     "ps5Stella": [
       "rawg-452649"
