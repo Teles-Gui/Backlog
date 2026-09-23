@@ -617,6 +617,22 @@
         "ps5"
       ],
       "addedAt": "2026-09-04T23:36:21.103Z"
+    },
+    "rawg-978865": {
+      "id": "rawg-978865",
+      "name": "Nobody Wants to Die",
+      "image": "https://media.rawg.io/media/games/4ef/4efba3c8f8cc57ee822b728fd60993ea.jpg",
+      "rawgId": 978865,
+      "released": "2024-07-16",
+      "availablePlatforms": [
+        "PC",
+        "PlayStation 5",
+        "Xbox Series S/X"
+      ],
+      "ownedPlatforms": [
+        "ps5"
+      ],
+      "addedAt": "2026-09-23T17:09:36.118Z"
     }
   },
   "backlog": [
@@ -648,7 +664,8 @@
     "rawg-28026",
     "rawg-990567",
     "rawg-989330",
-    "rawg-442839"
+    "rawg-442839",
+    "rawg-978865"
   ],
   "queues": {
     "ps5General": [],
