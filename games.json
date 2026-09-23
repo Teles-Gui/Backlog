@@ -636,7 +636,6 @@
     }
   },
   "backlog": [
-    "hell-is-us",
     "doom-the-dark-ages",
     "indiana-jones-great-circle",
     "control-resonant",
@@ -668,7 +667,9 @@
     "rawg-978865"
   ],
   "queues": {
-    "ps5General": [],
+    "ps5General": [
+      "hell-is-us"
+    ],
     "ps5Stella": [
       "rawg-452649"
     ],
