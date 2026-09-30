@@ -648,6 +648,24 @@
         "ps5"
       ],
       "addedAt": "2026-09-28T21:34:34.393Z"
+    },
+    "rawg-529829": {
+      "id": "rawg-529829",
+      "name": "Crimson Desert",
+      "image": "https://media.rawg.io/media/games/dac/dacfcdeaef957a36416f4e6d5ec76229.jpg",
+      "rawgId": 529829,
+      "released": "2026-03-19",
+      "availablePlatforms": [
+        "PC",
+        "PlayStation 5",
+        "Xbox One",
+        "PlayStation 4",
+        "Xbox Series S/X"
+      ],
+      "ownedPlatforms": [
+        "rog"
+      ],
+      "addedAt": "2026-09-30T23:14:16.247Z"
     }
   },
   "backlog": [
@@ -678,7 +696,8 @@
     "rawg-990567",
     "rawg-989330",
     "rawg-442839",
-    "rawg-978865"
+    "rawg-978865",
+    "rawg-529829"
   ],
   "queues": {
     "ps5General": [
