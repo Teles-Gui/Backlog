@@ -40,7 +40,8 @@
         "PlayStation 5",
         "Xbox Series S/X"
       ],
-      "metadataUpdatedAt": "2026-08-19T16:50:28.094Z"
+      "metadataUpdatedAt": "2026-08-19T16:50:28.094Z",
+      "completedAt": "2026-10-13T14:06:20.944Z"
     },
     "hollow-knight": {
       "id": "hollow-knight",
@@ -708,15 +709,14 @@
       "rawg-452649",
       "rawg-1018062"
     ],
-    "allyPower": [
-      "clair-obscur-expedition-33"
-    ],
+    "allyPower": [],
     "allyPortable": [
       "hollow-knight",
       "forgive-me-father"
     ]
   },
   "completed": [
-    "mafia-old-country"
+    "mafia-old-country",
+    "clair-obscur-expedition-33"
   ]
 }
