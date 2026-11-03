@@ -187,7 +187,8 @@
       "availablePlatforms": [
         "PlayStation 5"
       ],
-      "metadataUpdatedAt": "2026-08-19T16:50:34.245Z"
+      "metadataUpdatedAt": "2026-08-19T16:50:34.245Z",
+      "completedAt": "2026-11-03T14:27:23.603Z"
     },
     "saros": {
       "id": "saros",
@@ -702,8 +703,7 @@
   ],
   "queues": {
     "ps5General": [
-      "hell-is-us",
-      "marvels-wolverine"
+      "hell-is-us"
     ],
     "ps5Stella": [
       "rawg-452649",
@@ -717,6 +717,7 @@
   },
   "completed": [
     "mafia-old-country",
-    "clair-obscur-expedition-33"
+    "clair-obscur-expedition-33",
+    "marvels-wolverine"
   ]
 }
