@@ -675,7 +675,6 @@
     "indiana-jones-great-circle",
     "control-resonant",
     "saros",
-    "blood-of-dawnwalker",
     "resident-evil-4",
     "resident-evil-2-remake",
     "resident-evil-3",
@@ -703,7 +702,8 @@
   ],
   "queues": {
     "ps5General": [
-      "hell-is-us"
+      "hell-is-us",
+      "blood-of-dawnwalker"
     ],
     "ps5Stella": [
       "rawg-452649",
