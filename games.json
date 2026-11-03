@@ -702,12 +702,12 @@
   ],
   "queues": {
     "ps5General": [
-      "hell-is-us",
       "blood-of-dawnwalker"
     ],
     "ps5Stella": [
       "rawg-452649",
-      "rawg-1018062"
+      "rawg-1018062",
+      "hell-is-us"
     ],
     "allyPower": [],
     "allyPortable": [
